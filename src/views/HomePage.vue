@@ -22,9 +22,10 @@
         </div>
         <div class="hero-image">
           <img 
-            src="https://images.unsplash.com/photo-1542838132-92c53300491e?w=600" 
+            src="https://images.unsplash.com/photo-1542838132-92c53300491e?w=600&h=400&fit=crop&crop=center&auto=format&q=80" 
             alt="Produits artisanaux écologiques"
             class="hero-img"
+            loading="lazy"
           />
         </div>
       </div>
