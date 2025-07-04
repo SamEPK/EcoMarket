@@ -1,26 +1,41 @@
-import { ref, computed } from 'vue'
+import { ref, computed, type Ref, type ComputedRef } from 'vue'
+import type { ValidationRules, UseFormReturn } from '@/types'
 
-export function useForm(initialValues = {}) {
-  const formData = ref({ ...initialValues })
-  const errors = ref({})
-  const isSubmitting = ref(false)
+interface FormValidationRule {
+  required?: boolean
+  minLength?: number
+  maxLength?: number
+  email?: boolean
+  pattern?: RegExp
+  patternMessage?: string
+  custom?: (value: any) => string | null
+}
+
+interface FormValidationRules {
+  [key: string]: FormValidationRule
+}
+
+export function useForm(initialValues: Record<string, any> = {}): UseFormReturn {
+  const formData: Ref<Record<string, any>> = ref({ ...initialValues })
+  const errors: Ref<Record<string, string>> = ref({})
+  const isSubmitting: Ref<boolean> = ref(false)
   
   // Validation des champs
-  const validationRules = ref({})
+  const validationRules: Ref<FormValidationRules> = ref({})
   
-  const isValid = computed(() => {
+  const isValid: ComputedRef<boolean> = computed(() => {
     return Object.keys(errors.value).length === 0
   })
   
-  function setValidationRules(rules) {
+  function setValidationRules(rules: FormValidationRules): void {
     validationRules.value = rules
   }
   
-  function validateField(fieldName, value) {
+  function validateField(fieldName: string, value: any): boolean {
     const rules = validationRules.value[fieldName]
     if (!rules) return true
     
-    let fieldErrors = []
+    let fieldErrors: string[] = []
     
     // Validation required
     if (rules.required && (!value || value.toString().trim() === '')) {
@@ -74,19 +89,18 @@ export function useForm(initialValues = {}) {
     
     return isFormValid
   }
-  
-  function updateField(fieldName, value) {
+    function updateField(fieldName: string, value: any): void {
     formData.value[fieldName] = value
     validateField(fieldName, value)
   }
-  
-  function resetForm() {
+
+  function resetForm(): void {
     formData.value = { ...initialValues }
     errors.value = {}
     isSubmitting.value = false
   }
-  
-  async function submitForm(submitHandler) {
+
+  async function submitForm(submitHandler: (data: any) => Promise<void>): Promise<boolean> {
     if (!validateForm()) {
       return false
     }
@@ -114,6 +128,8 @@ export function useForm(initialValues = {}) {
     validateForm,
     updateField,
     resetForm,
-    submitForm
+    submitForm,
+    validate: validateForm,
+    reset: resetForm
   }
 }

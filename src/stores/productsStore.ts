@@ -1,12 +1,13 @@
 import { defineStore } from 'pinia'
-import { ref, computed } from 'vue'
+import { ref, computed, type Ref, type ComputedRef } from 'vue'
 import { useApi } from '@/composables/useApi'
+import type { Product, ProductFilters } from '@/types'
 
 export const useProductsStore = defineStore('products', () => {
-  const products = ref([])
-  const loading = ref(false)
-  const error = ref(null)
-  const filters = ref({
+  const products: Ref<Product[]> = ref([])
+  const loading: Ref<boolean> = ref(false)
+  const error: Ref<string | null> = ref(null)
+  const filters: Ref<ProductFilters> = ref({
     category: '',
     minPrice: 0,
     maxPrice: 1000,
@@ -14,7 +15,7 @@ export const useProductsStore = defineStore('products', () => {
   })
   
   const { fetchData } = useApi()
-  const filteredProducts = computed(() => {
+  const filteredProducts: ComputedRef<Product[]> = computed(() => {
     let filtered = products.value
     
     if (filters.value.category) {
@@ -39,12 +40,12 @@ export const useProductsStore = defineStore('products', () => {
     return filtered
   })
   
-  const categories = computed(() => {
+  const categories: ComputedRef<string[]> = computed(() => {
     const cats = [...new Set(products.value.map(p => p.category))]
     return cats.sort()
   })
   
-  async function fetchProducts() {
+  async function fetchProducts(): Promise<void> {
     loading.value = true
     error.value = null
     
@@ -54,7 +55,7 @@ export const useProductsStore = defineStore('products', () => {
       try {
         const apiResponse = await fetchData('https://fakestoreapi.com/products')
         
-        apiProducts = apiResponse.map(product => ({
+        apiProducts = apiResponse.map((product: any) => ({
           id: product.id,
           name: product.title,
           description: product.description,
@@ -146,12 +147,11 @@ export const useProductsStore = defineStore('products', () => {
       loading.value = false
     }
   }
-  
-  function updateFilters(newFilters) {
+    function updateFilters(newFilters: Partial<ProductFilters>): void {
     filters.value = { ...filters.value, ...newFilters }
   }
-  
-  function resetFilters() {
+
+  function resetFilters(): void {
     filters.value = {
       category: '',
       minPrice: 0,
@@ -159,13 +159,13 @@ export const useProductsStore = defineStore('products', () => {
       searchTerm: ''
     }
   }
-  
-  function getProductById(id) {
-    return products.value.find(product => product.id === parseInt(id))
+
+  function getProductById(id: string | number): Product | undefined {
+    return products.value.find(product => product.id === parseInt(id.toString()))
   }
-  
-  function transformCategory(apiCategory) {
-    const categoryMap = {
+
+  function transformCategory(apiCategory: string): string {
+    const categoryMap: Record<string, string> = {
       "men's clothing": "Vêtements",
       "women's clothing": "Vêtements", 
       "jewelery": "Bijoux",
@@ -173,9 +173,9 @@ export const useProductsStore = defineStore('products', () => {
     }
     return categoryMap[apiCategory] || "Divers"
   }
-  
-  function generateArtisanName(category) {
-    const artisanNames = {
+
+  function generateArtisanName(category: string): string {
+    const artisanNames: Record<string, string[]> = {
       "Vêtements": ["Atelier Couture Bio", "Mode Éthique", "Textile Vert"],
       "Bijoux": ["Créations Artisanales", "Bijoux Naturels", "Orfèvre Éco"],
       "Électronique": ["Tech Responsable", "Éco-Innovation", "Green Tech"],
