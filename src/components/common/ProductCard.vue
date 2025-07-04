@@ -137,7 +137,6 @@
 <script setup>
 import { computed } from 'vue'
 import { useImage } from '@/composables/useImage'
-import { useImage } from '@/composables/useImage'
 
 // Props avec validation étendue
 const props = defineProps({
