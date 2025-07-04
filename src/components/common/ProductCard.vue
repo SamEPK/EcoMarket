@@ -2,10 +2,17 @@
   <div class="product-card" @click="$emit('click', product)">
     <!-- Image du produit -->
     <div class="product-image">
+      <div v-if="!imageLoaded && !imageError" class="image-loader">
+        <div class="loader-spinner"></div>
+      </div>
       <img 
-        :src="product.image" 
+        :src="optimizedImageUrl" 
         :alt="product.name"
+        @load="handleImageLoad"
         @error="handleImageError"
+        :class="{ 'image-loaded': imageLoaded, 'image-hidden': !imageLoaded }"
+        loading="lazy"
+        decoding="async"
       />
       <div v-if="!product.inStock" class="out-of-stock-overlay">
         Rupture de stock
@@ -38,6 +45,7 @@
 
 <script setup>
 import { computed } from 'vue'
+import { useImage } from '@/composables/useImage'
 
 // Props avec validation
 const props = defineProps({
@@ -60,6 +68,14 @@ const props = defineProps({
 // Events émis
 const emit = defineEmits(['click', 'add-to-cart'])
 
+// Composable pour la gestion des images
+const { imageLoaded, imageError, handleImageLoad, handleImageError, getOptimizedImageUrl } = useImage()
+
+// Computed pour l'URL optimisée de l'image
+const optimizedImageUrl = computed(() => {
+  return getOptimizedImageUrl(props.product.image, 400, 300)
+})
+
 // Computed pour tronquer la description
 const truncatedDescription = computed(() => {
   if (props.product.description.length <= props.maxDescriptionLength) {
@@ -74,11 +90,6 @@ function formatPrice(price) {
     style: 'currency',
     currency: 'EUR'
   }).format(price)
-}
-
-function handleImageError(event) {
-  // Image de fallback en cas d'erreur
-  event.target.src = 'https://via.placeholder.com/400x300?text=Image+non+disponible'
 }
 
 function handleAddToCart() {
@@ -110,13 +121,48 @@ function handleAddToCart() {
   position: relative;
   height: 200px;
   overflow: hidden;
+  background: var(--light-gray);
+}
+
+.image-loader {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--light-gray);
+}
+
+.loader-spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid var(--light-gray);
+  border-top: 3px solid var(--primary-color);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 
 .product-image img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.3s ease;
+  transition: all 0.3s ease;
+}
+
+.image-hidden {
+  opacity: 0;
+}
+
+.image-loaded {
+  opacity: 1;
 }
 
 .product-card:hover .product-image img {
