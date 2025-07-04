@@ -91,7 +91,7 @@ function goToProductDetail(product) {
 function addToCart(product) {
   cartStore.addItem(product)
   
-  // Feedback visuel (toast notification pourrait être ajoutée)
+  // Le toast est maintenant géré automatiquement par le store
   console.log(`${product.name} ajouté au panier`)
 }
 
@@ -102,10 +102,30 @@ function handleResetFilters() {
     minPrice: 0,
     maxPrice: 1000
   }
+  
+  // Notification de réinitialisation
+  if (typeof window !== 'undefined' && window.showToast) {
+    window.showToast({
+      type: 'info',
+      title: 'Filtres réinitialisés',
+      message: 'Tous les filtres ont été remis à zéro',
+      duration: 2000
+    })
+  }
 }
 
 function retryLoading() {
   productsStore.fetchProducts()
+  
+  // Notification de rechargement
+  if (typeof window !== 'undefined' && window.showToast) {
+    window.showToast({
+      type: 'info',
+      title: 'Rechargement en cours',
+      message: 'Tentative de rechargement des produits...',
+      duration: 2000
+    })
+  }
 }
 
 // Watchers

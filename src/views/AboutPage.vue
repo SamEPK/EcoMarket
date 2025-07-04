@@ -357,7 +357,7 @@ async function sendMessage() {
 
 /* Hero Section */
 .hero-section {
-  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  background: var(--primary-color);
   color: var(--white);
   padding: 4rem 0;
   text-align: center;

@@ -81,7 +81,7 @@ function filterByCategory(category) {
 
 <style scoped>
 .footer {
-  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  background: var(--primary-color);
   color: var(--white);
   margin-top: auto;
 }

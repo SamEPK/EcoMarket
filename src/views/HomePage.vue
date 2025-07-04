@@ -12,10 +12,18 @@
             créés avec passion par des artisans locaux.
           </p>
           <div class="hero-actions">
-            <RouterLink to="/products" class="cta-button primary">
+            <RouterLink 
+              to="/products" 
+              class="cta-button primary"
+              @click="trackCTAClick('products')"
+            >
               Explorer nos produits
             </RouterLink>
-            <RouterLink to="/about" class="cta-button secondary">
+            <RouterLink 
+              to="/about" 
+              class="cta-button secondary"
+              @click="trackCTAClick('about')"
+            >
               En savoir plus
             </RouterLink>
           </div>
@@ -135,6 +143,22 @@ const featuredProducts = computed(() =>
 )
 
 // Méthodes
+function trackCTAClick(section) {
+  if (typeof window !== 'undefined' && window.showToast) {
+    const messages = {
+      products: 'Redirection vers nos produits...',
+      about: 'Découvrez notre histoire...'
+    }
+    
+    window.showToast({
+      type: 'info',
+      title: 'Navigation',
+      message: messages[section] || 'Navigation en cours...',
+      duration: 2000
+    })
+  }
+}
+
 function goToProduct(product) {
   router.push(`/product/${product.id}`)
 }
@@ -145,7 +169,31 @@ function addToCart(product) {
 }
 
 async function subscribeNewsletter() {
-  if (!emailInput.value) return
+  if (!emailInput.value) {
+    if (typeof window !== 'undefined' && window.showToast) {
+      window.showToast({
+        type: 'warning',
+        title: 'Email requis',
+        message: 'Veuillez saisir votre adresse email',
+        duration: 3000
+      })
+    }
+    return
+  }
+  
+  // Validation simple de l'email
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+  if (!emailRegex.test(emailInput.value)) {
+    if (typeof window !== 'undefined' && window.showToast) {
+      window.showToast({
+        type: 'error',
+        title: 'Email invalide',
+        message: 'Veuillez saisir une adresse email valide',
+        duration: 3000
+      })
+    }
+    return
+  }
   
   isSubscribing.value = true
   subscriptionMessage.value = ''
@@ -154,12 +202,36 @@ async function subscribeNewsletter() {
     // Simulation d'un appel API
     await new Promise(resolve => setTimeout(resolve, 1500))
     
+    // Simulation d'une possible erreur (5% de chance)
+    if (Math.random() < 0.05) {
+      throw new Error('Erreur serveur')
+    }
+    
     subscriptionMessage.value = 'Inscription réussie ! Merci de votre confiance.'
     messageType.value = 'success'
+    
+    if (typeof window !== 'undefined' && window.showToast) {
+      window.showToast({
+        type: 'success',
+        title: 'Newsletter',
+        message: 'Inscription réussie ! Vous recevrez nos dernières actualités.',
+        duration: 4000
+      })
+    }
+    
     emailInput.value = ''
   } catch (error) {
     subscriptionMessage.value = 'Erreur lors de l\'inscription. Veuillez réessayer.'
     messageType.value = 'error'
+    
+    if (typeof window !== 'undefined' && window.showToast) {
+      window.showToast({
+        type: 'error',
+        title: 'Erreur d\'inscription',
+        message: 'Une erreur est survenue. Veuillez réessayer dans quelques instants.',
+        duration: 4000
+      })
+    }
   } finally {
     isSubscribing.value = false
     // Efface le message après 5 secondes
@@ -185,7 +257,7 @@ onMounted(() => {
 
 /* Hero Section */
 .hero {
-  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  background: var(--background-secondary);
   padding: 4rem 1rem;
   min-height: 80vh;
   display: flex;

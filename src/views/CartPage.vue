@@ -111,12 +111,94 @@ function updateQuantity(productId, quantity) {
 }
 
 function removeItem(productId) {
-  cartStore.removeItem(productId)
+  // Afficher une modal de confirmation
+  if (typeof window !== 'undefined' && window.showModal) {
+    const item = items.value.find(item => item.id === productId)
+    if (item) {
+      window.showModal({
+        title: 'Confirmer la suppression',
+        component: 'div',
+        props: {
+          innerHTML: `
+            <div style="text-align: center; padding: 1rem;">
+              <p>Êtes-vous sûr de vouloir retirer <strong>${item.name}</strong> de votre panier ?</p>
+              <p style="color: var(--text-muted); font-size: 0.9rem;">Cette action est irréversible.</p>
+            </div>
+          `
+        },
+        actions: [
+          {
+            label: 'Annuler',
+            action: () => window.closeModal(),
+            variant: 'secondary'
+          },
+          {
+            label: 'Confirmer',
+            action: () => {
+              cartStore.removeItem(productId)
+              window.closeModal()
+            },
+            variant: 'danger'
+          }
+        ]
+      })
+    }
+  } else {
+    // Fallback pour les navigateurs sans support modal
+    cartStore.removeItem(productId)
+  }
 }
 
 function clearCart() {
-  if (confirm('Êtes-vous sûr de vouloir vider votre panier ?')) {
-    cartStore.clearCart()
+  if (items.value.length === 0) {
+    if (typeof window !== 'undefined' && window.showToast) {
+      window.showToast({
+        type: 'info',
+        title: 'Panier déjà vide',
+        message: 'Votre panier ne contient aucun article',
+        duration: 2000
+      })
+    }
+    return
+  }
+
+  // Afficher une modal de confirmation pour vider le panier
+  if (typeof window !== 'undefined' && window.showModal) {
+    window.showModal({
+      title: 'Vider le panier',
+      component: 'div',
+      props: {
+        innerHTML: `
+          <div style="text-align: center; padding: 1rem;">
+            <p>Êtes-vous sûr de vouloir vider complètement votre panier ?</p>
+            <p style="color: var(--text-muted); font-size: 0.9rem;">
+              Tous les articles (${itemCount.value}) seront supprimés de votre panier.
+            </p>
+            <p style="color: var(--text-muted); font-size: 0.9rem;">Cette action est irréversible.</p>
+          </div>
+        `
+      },
+      actions: [
+        {
+          label: 'Annuler',
+          action: () => window.closeModal(),
+          variant: 'secondary'
+        },
+        {
+          label: 'Vider le panier',
+          action: () => {
+            cartStore.clearCart()
+            window.closeModal()
+          },
+          variant: 'danger'
+        }
+      ]
+    })
+  } else {
+    // Fallback pour les navigateurs sans support modal
+    if (confirm('Êtes-vous sûr de vouloir vider votre panier ?')) {
+      cartStore.clearCart()
+    }
   }
 }
 </script>

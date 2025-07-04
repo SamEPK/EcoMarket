@@ -347,22 +347,93 @@ function formatPrice(price) {
 }
 
 async function handleSubmit() {
+  // Vérifier si le panier n'est pas vide
+  if (isEmpty.value) {
+    if (typeof window !== 'undefined' && window.showToast) {
+      window.showToast({
+        type: 'error',
+        title: 'Panier vide',
+        message: 'Votre panier est vide. Ajoutez des produits avant de commander.',
+        duration: 4000
+      })
+    }
+    return
+  }
+
   const success = await submitForm(async (data) => {
-    // Simulation d'un appel API pour traiter la commande
-    console.log('Données de commande:', data)
-    
-    // Simulation d'un délai de traitement
-    await new Promise(resolve => setTimeout(resolve, 2000))
-    
-    // Vider le panier après succès
-    cartStore.clearCart()
-    
-    // Redirection vers une page de confirmation
-    router.push('/order-success')
+    // Afficher un toast de début de traitement
+    if (typeof window !== 'undefined' && window.showToast) {
+      window.showToast({
+        type: 'info',
+        title: 'Commande en cours',
+        message: 'Traitement de votre commande en cours...',
+        duration: 3000
+      })
+    }
+
+    try {
+      // Simulation d'un appel API pour traiter la commande
+      console.log('Données de commande:', data)
+      
+      // Simulation d'un délai de traitement
+      await new Promise(resolve => setTimeout(resolve, 2000))
+      
+      // Simulation d'une possible erreur (10% de chance)
+      if (Math.random() < 0.1) {
+        throw new Error('Erreur de traitement de paiement')
+      }
+      
+      // Succès : vider le panier et afficher une notification
+      cartStore.clearCart()
+      
+      if (typeof window !== 'undefined' && window.showToast) {
+        window.showToast({
+          type: 'success',
+          title: 'Commande confirmée !',
+          message: 'Votre commande a été traitée avec succès. Vous allez recevoir un email de confirmation.',
+          duration: 5000
+        })
+      }
+      
+      // Redirection vers une page de confirmation
+      setTimeout(() => {
+        router.push('/order-success')
+      }, 1500)
+      
+    } catch (error) {
+      // Gestion des erreurs
+      console.error('Erreur lors du traitement de la commande:', error)
+      
+      if (typeof window !== 'undefined' && window.showToast) {
+        window.showToast({
+          type: 'error',
+          title: 'Erreur de commande',
+          message: 'Une erreur est survenue lors du traitement de votre commande. Veuillez réessayer.',
+          duration: 5000,
+          actions: [
+            {
+              label: 'Réessayer',
+              action: () => handleSubmit()
+            }
+          ]
+        })
+      }
+      
+      throw error // Re-throw pour que submitForm puisse gérer l'erreur
+    }
   })
 
   if (!success) {
     console.error('Erreur lors de la soumission du formulaire')
+    
+    if (typeof window !== 'undefined' && window.showToast) {
+      window.showToast({
+        type: 'error',
+        title: 'Formulaire invalide',
+        message: 'Veuillez corriger les erreurs dans le formulaire avant de continuer.',
+        duration: 4000
+      })
+    }
   }
 }
 

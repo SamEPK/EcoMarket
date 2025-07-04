@@ -64,6 +64,36 @@ export interface ApiError {
   details?: any
 }
 
+// Types pour les notifications toast
+export interface ToastAction {
+  label: string
+  action: () => void
+}
+
+export interface ToastData {
+  type?: 'success' | 'error' | 'warning' | 'info'
+  title?: string
+  message: string
+  duration?: number
+  actions?: ToastAction[]
+}
+
+// Types pour les modals
+export interface ModalAction {
+  label: string
+  action: () => void
+  variant?: 'primary' | 'secondary' | 'danger'
+}
+
+export interface ModalData {
+  title?: string
+  size?: 'small' | 'medium' | 'large'
+  closable?: boolean
+  component?: any
+  props?: Record<string, any>
+  actions?: ModalAction[]
+}
+
 // Types pour les composables
 export interface UseApiReturn {
   loading: Ref<boolean>
@@ -89,3 +119,12 @@ export interface UseFormReturn {
 
 // Import des types Vue
 import type { Ref, ComputedRef } from 'vue'
+
+// Déclaration des types globaux pour les fonctions window
+declare global {
+  interface Window {
+    showToast: (data: ToastData) => number
+    showModal: (data: ModalData) => void
+    closeModal: () => void
+  }
+}
