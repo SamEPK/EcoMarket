@@ -204,18 +204,18 @@ onMounted(() => {
 .hero-title {
   font-size: 3rem;
   font-weight: bold;
-  color: var(--text-dark);
+  color: #0f172a;
   margin-bottom: 1rem;
   line-height: 1.2;
 }
 
 .brand-highlight {
-  color: var(--primary-color);
+  color: #475569;
 }
 
 .hero-subtitle {
   font-size: 1.2rem;
-  color: var(--text-light);
+  color: #334155;
   margin-bottom: 2rem;
   line-height: 1.6;
 }
@@ -236,24 +236,26 @@ onMounted(() => {
 }
 
 .cta-button.primary {
-  background: var(--primary-color);
-  color: var(--white);
+  background: #475569;
+  color: #ffffff;
+  border: 2px solid #475569;
 }
 
 .cta-button.primary:hover {
-  background: #45a049;
+  background: #334155;
+  border-color: #334155;
   transform: translateY(-2px);
 }
 
 .cta-button.secondary {
   background: transparent;
-  color: var(--primary-color);
-  border: 2px solid var(--primary-color);
+  color: #475569;
+  border: 2px solid #475569;
 }
 
 .cta-button.secondary:hover {
-  background: var(--primary-color);
-  color: var(--white);
+  background: #475569;
+  color: #ffffff;
 }
 
 .hero-image {

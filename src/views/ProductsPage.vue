@@ -9,7 +9,7 @@
 
       <!-- Filtres de recherche -->
       <SearchFilters
-        v-model="filters"
+        v-model=" filters"
         :categories="categories"
         :result-count="filteredProducts.length"
         @reset="handleResetFilters"
@@ -23,7 +23,7 @@
 
       <!-- Message d'erreur -->
       <div v-else-if="error" class="error-state">
-        <p>❌ {{ error }}</p>
+        <p>✗ {{ error }}</p>
         <button @click="retryLoading" class="retry-btn">
           Réessayer
         </button>
@@ -45,7 +45,6 @@
       <!-- Aucun produit trouvé -->
       <div v-else class="no-products">
         <div class="no-products-content">
-          <span class="no-products-icon">🔍</span>
           <h3>Aucun produit trouvé</h3>
           <p>Essayez de modifier vos critères de recherche</p>
           <button @click="handleResetFilters" class="reset-filters-btn">
@@ -201,7 +200,7 @@ onMounted(async () => {
 }
 
 .retry-btn:hover {
-  background: #45a049;
+  background: #475569;
   transform: translateY(-1px);
 }
 

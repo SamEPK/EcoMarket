@@ -43,9 +43,9 @@
         <div class="footer-section">
           <h4>Contact</h4>
           <div class="contact-info">
-            <p>📧 contact@ecomarket.fr</p>
-            <p>📞 01 23 45 67 89</p>
-            <p>📍 123 Rue Verte, 75001 Paris</p>
+            <p>contact@ecomarket.fr</p>
+            <p>01 23 45 67 89</p>
+            <p>123 Rue Verte, 75001 Paris</p>
           </div>
         </div>
       </div>
@@ -54,7 +54,7 @@
       <div class="footer-bottom">
         <p>&copy; {{ currentYear }} EcoMarket. Tous droits réservés.</p>
         <p class="footer-note">
-          Fait avec ❤️ pour la planète
+          Fait avec ♥ pour la planète
         </p>
       </div>
     </div>

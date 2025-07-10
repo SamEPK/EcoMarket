@@ -15,35 +15,35 @@
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   line-height: 1.6;
-  color: #333;
-  background-color: #f8f9fa;
+  color: #0f172a;
+  background-color: #f8fafc;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 /* Variables CSS globales */
 :root {
-  /* Couleurs principales */
-  --primary-color: #4CAF50;
-  --secondary-color: #8BC34A;
-  --accent-color: #FF9800;
+  /* Couleurs principales - Thème blanc/gris-bleuté */
+  --primary-color: #475569;
+  --secondary-color: #64748b;
+  --accent-color: #334155;
   
   /* Couleurs de texte */
-  --text-dark: #333333;
-  --text-light: #666666;
+  --text-dark: #0f172a;
+  --text-light: #334155;
   
   /* Couleurs de fond */
-  --background-light: #f8f9fa;
+  --background-light: #f8fafc;
   --white: #ffffff;
   
   /* Couleurs d'état */
-  --success-color: #4CAF50;
-  --error-color: #f44336;
-  --warning-color: #FF9800;
-  --info-color: #2196F3;
+  --success-color: #64748b;
+  --error-color: #ef4444;
+  --warning-color: #f59e0b;
+  --info-color: #3b82f6;
   
   /* Bordures */
-  --border-color: #e0e0e0;
+  --border-color: #cbd5e1;
   --border-radius: 8px;
   
   /* Ombres */
@@ -94,7 +94,7 @@ a {
 }
 
 a:hover {
-  color: var(--text-dark);
+  color: var(--accent-color);
 }
 
 /* Boutons */
@@ -106,7 +106,8 @@ a:hover {
   border: none;
   border-radius: var(--border-radius);
   font-size: 1rem;
-  font-weight: 500;
+  font-weight: 600;
+  letter-spacing: 0.025em;
   text-decoration: none;
   cursor: pointer;
   transition: all var(--transition-normal);
@@ -121,24 +122,25 @@ a:hover {
 }
 
 .btn-primary {
-  background: var(--primary-color);
-  color: var(--white);
+  background: #475569;
+  border: 2px solid #475569;
+  color: #ffffff;
 }
 
 .btn-primary:hover:not(:disabled) {
-  background: #45a049;
-  transform: translateY(-1px);
-  box-shadow: var(--shadow-medium);
+  background: #334155;
+  border-color: #334155;
 }
 
 .btn-secondary {
-  background: var(--secondary-color);
-  color: var(--white);
+  background: #64748b;
+  border: 2px solid #64748b;
+  color: #ffffff;
 }
 
 .btn-secondary:hover:not(:disabled) {
-  background: var(--primary-color);
-  transform: translateY(-1px);
+  background: #475569;
+  border-color: #475569;
 }
 
 .btn-outline {
@@ -150,6 +152,7 @@ a:hover {
 .btn-outline:hover:not(:disabled) {
   background: var(--primary-color);
   color: var(--white);
+  border-color: var(--primary-color);
 }
 
 .btn-small {
@@ -166,17 +169,18 @@ a:hover {
 .form-control {
   width: 100%;
   padding: var(--spacing-sm) var(--spacing-md);
-  border: 1px solid var(--border-color);
+  border: 2px solid #cbd5e1;
   border-radius: var(--border-radius);
   font-size: 1rem;
   transition: border-color var(--transition-fast);
-  background: var(--white);
+  color: #0f172a;
+  background: #ffffff;
 }
 
 .form-control:focus {
   outline: none;
-  border-color: var(--primary-color);
-  box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.1);
+  border-color: #475569;
+  box-shadow: 0 0 0 3px rgba(71, 85, 105, 0.1);
 }
 
 .form-control.error {
@@ -190,8 +194,8 @@ a:hover {
 .form-label {
   display: block;
   margin-bottom: var(--spacing-xs);
-  font-weight: 500;
-  color: var(--text-dark);
+  font-weight: 600;
+  color: #0f172a;
 }
 
 .form-error {
@@ -204,14 +208,15 @@ a:hover {
 /* Cartes */
 .card {
   background: var(--white);
+  border: 1px solid #cbd5e1;
   border-radius: 12px;
-  box-shadow: var(--shadow-light);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
   overflow: hidden;
   transition: box-shadow var(--transition-normal);
 }
 
 .card:hover {
-  box-shadow: var(--shadow-medium);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
 }
 
 .card-header {
@@ -234,31 +239,32 @@ a:hover {
   padding: var(--spacing-md);
   border-radius: var(--border-radius);
   margin-bottom: var(--spacing-md);
-  border: 1px solid transparent;
+  border: 1px solid;
+  font-weight: 500;
 }
 
 .alert-success {
-  background: rgba(76, 175, 80, 0.1);
-  border-color: rgba(76, 175, 80, 0.2);
-  color: #2e7d32;
+  background: rgba(71, 85, 105, 0.1);
+  border-color: rgba(71, 85, 105, 0.2);
+  color: #1e293b;
 }
 
 .alert-error {
-  background: rgba(244, 67, 54, 0.1);
-  border-color: rgba(244, 67, 54, 0.2);
-  color: #c62828;
+  background: rgba(239, 68, 68, 0.1);
+  border-color: rgba(239, 68, 68, 0.3);
+  color: #b91c1c;
 }
 
 .alert-warning {
-  background: rgba(255, 152, 0, 0.1);
-  border-color: rgba(255, 152, 0, 0.2);
-  color: #ef6c00;
+  background: rgba(245, 158, 11, 0.1);
+  border-color: rgba(245, 158, 11, 0.3);
+  color: #92400e;
 }
 
 .alert-info {
-  background: rgba(33, 150, 243, 0.1);
-  border-color: rgba(33, 150, 243, 0.2);
-  color: #1565c0;
+  background: rgba(59, 130, 246, 0.1);
+  border-color: rgba(59, 130, 246, 0.3);
+  color: #1e40af;
 }
 
 /* Chargement */
@@ -270,8 +276,8 @@ a:hover {
 .spinner {
   width: 40px;
   height: 40px;
-  border: 4px solid var(--border-color);
-  border-top: 4px solid var(--primary-color);
+  border: 4px solid #e2e8f0;
+  border-top: 4px solid #475569;
   border-radius: 50%;
   animation: spin 1s linear infinite;
 }
@@ -347,6 +353,108 @@ a:hover {
   border: 0;
 }
 
+/* Améliorations du contraste et lisibilité */
+.btn-secondary:hover:not(:disabled) {
+  background: var(--primary-color);
+  transform: translateY(-1px);
+}
+
+.btn-outline:hover:not(:disabled) {
+  background: var(--primary-color);
+  color: var(--white);
+  border-color: var(--primary-color);
+}
+
+/* Amélioration des contrastes pour les textes */
+.text-muted {
+  color: #64748b !important;
+}
+
+.text-secondary {
+  color: #475569 !important;
+}
+
+.text-primary {
+  color: #0f172a !important;
+}
+
+/* Amélioration des badges */
+.badge-new {
+  background: var(--primary-color);
+  color: var(--white);
+}
+
+.badge-eco {
+  background: var(--secondary-color);
+  color: var(--white);
+}
+
+.badge-discount {
+  background: var(--accent-color);
+  color: var(--white);
+}
+
+/* Amélioration des cartes */
+.card {
+  background: var(--white);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  transition: box-shadow var(--transition-normal);
+}
+
+.card:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+}
+
+/* Amélioration des liens */
+a {
+  color: var(--primary-color);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+a:hover {
+  color: var(--accent-color);
+}
+
+/* Amélioration des inputs */
+.form-control {
+  border: 2px solid #cbd5e1;
+  color: #0f172a;
+  background: #ffffff;
+}
+
+.form-control:focus {
+  border-color: #475569;
+  box-shadow: 0 0 0 3px rgba(71, 85, 105, 0.1);
+}
+
+/* Amélioration des boutons pour plus de contraste */
+.btn {
+  font-weight: 600;
+  letter-spacing: 0.025em;
+}
+
+.btn-primary {
+  background: #475569;
+  border: 2px solid #475569;
+  color: #ffffff;
+}
+
+.btn-secondary {
+  background: #64748b;
+  border: 2px solid #64748b;
+  color: #ffffff;
+}
+
+/* Amélioration des spinner */
+.spinner {
+  border: 4px solid #e2e8f0;
+  border-top: 4px solid #475569;
+}
+
 /* Responsive breakpoints */
 @media (max-width: 1200px) {
   :root {
@@ -401,12 +509,145 @@ a:hover {
 /* Mode sombre (optionnel) */
 @media (prefers-color-scheme: dark) {
   :root {
-    --text-dark: #f5f5f5;
-    --text-light: #cccccc;
-    --background-light: #1a1a1a;
-    --white: #2d2d2d;
-    --border-color: #404040;
+    --text-dark: #f1f5f9;
+    --text-light: #cbd5e1;
+    --background-light: #0f172a;
+    --white: #1e293b;
+    --border-color: #334155;
+    --primary-color: #94a3b8;
+    --secondary-color: #cbd5e1;
   }
+}
+
+/* Styles spécifiques pour améliorer la lisibilité et le contraste */
+
+/* Amélioration des boutons pour plus de contraste */
+.btn-primary {
+  background: #475569;
+  border: 2px solid #475569;
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: #334155;
+  border-color: #334155;
+}
+
+.btn-secondary {
+  background: #64748b;
+  border: 2px solid #64748b;
+  color: #ffffff;
+}
+
+.btn-secondary:hover:not(:disabled) {
+  background: #475569;
+  border-color: #475569;
+}
+
+/* Amélioration des alertes */
+.alert {
+  border: 1px solid;
+  font-weight: 500;
+}
+
+.alert-info {
+  background: rgba(59, 130, 246, 0.1);
+  border-color: rgba(59, 130, 246, 0.3);
+  color: #1e40af;
+}
+
+.alert-warning {
+  background: rgba(245, 158, 11, 0.1);
+  border-color: rgba(245, 158, 11, 0.3);
+  color: #92400e;
+}
+
+.alert-error {
+  background: rgba(239, 68, 68, 0.1);
+  border-color: rgba(239, 68, 68, 0.3);
+  color: #b91c1c;
+}
+
+/* Amélioration des inputs et formulaires */
+.form-control {
+  border: 2px solid #cbd5e1;
+  background: #ffffff;
+  color: #0f172a;
+  font-weight: 500;
+}
+
+.form-control:focus {
+  border-color: #475569;
+  box-shadow: 0 0 0 3px rgba(71, 85, 105, 0.1);
+}
+
+.form-control::placeholder {
+  color: #64748b;
+}
+
+.form-label {
+  color: #0f172a;
+  font-weight: 600;
+}
+
+/* Amélioration des liens */
+a {
+  color: #475569;
+  font-weight: 500;
+}
+
+a:hover {
+  color: #334155;
+}
+
+/* Amélioration des textes */
+h1, h2, h3, h4, h5, h6 {
+  color: #0f172a;
+  font-weight: 700;
+}
+
+p {
+  color: #334155;
+}
+
+/* Amélioration des badges */
+.badge {
+  font-weight: 700;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+/* Amélioration des cartes */
+.card {
+  border: 1px solid #cbd5e1;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.card:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+}
+
+/* Amélioration des spinners */
+.spinner,
+.loading-spinner {
+  border: 4px solid #e2e8f0;
+  border-top: 4px solid #475569;
+}
+
+/* Amélioration des états de focus pour l'accessibilité */
+button:focus,
+input:focus,
+select:focus,
+textarea:focus {
+  outline: 2px solid #475569;
+  outline-offset: 2px;
+}
+
+/* Amélioration du contraste pour les éléments interactifs */
+[role="button"]:focus,
+[tabindex]:focus {
+  outline: 2px solid #475569;
+  outline-offset: 2px;
 }
 
 /* Print styles */

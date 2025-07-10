@@ -10,7 +10,6 @@
       <!-- Panier vide -->
       <div v-if="isEmpty" class="empty-cart">
         <div class="empty-cart-content">
-          <span class="empty-cart-icon">🛒</span>
           <h2>Votre panier est vide</h2>
           <p>Découvrez nos produits artisanaux et écologiques</p>
           <RouterLink to="/products" class="continue-shopping-btn">

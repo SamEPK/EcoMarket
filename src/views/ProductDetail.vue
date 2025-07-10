@@ -34,7 +34,7 @@
           <div class="product-header">
             <h1 class="product-title">{{ product.name }}</h1>
             <div class="product-rating">
-              <span class="stars">⭐⭐⭐⭐⭐</span>
+              <span class="stars">★★★★★</span>
               <span class="rating-value">({{ product.rating }})</span>
             </div>
             <p class="product-artisan">

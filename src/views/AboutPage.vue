@@ -204,24 +204,8 @@
             </p>
             
             <div class="contact-details">
-              <div class="contact-item">
-                <span class="contact-icon">📧</span>
-                <div>
-                  <strong>Email</strong>
-                  <p>contact@ecomarket.fr</p>
-                </div>
-              </div>
               
               <div class="contact-item">
-                <span class="contact-icon">📞</span>
-                <div>
-                  <strong>Téléphone</strong>
-                  <p>01 23 45 67 89</p>
-                </div>
-              </div>
-              
-              <div class="contact-item">
-                <span class="contact-icon">📍</span>
                 <div>
                   <strong>Adresse</strong>
                   <p>123 Rue Verte<br>75001 Paris, France</p>

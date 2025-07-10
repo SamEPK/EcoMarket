@@ -31,7 +31,7 @@
       <!-- Badges et overlays -->
       <div class="product-badges">
         <span v-if="product.isNew" class="badge badge-new">Nouveau</span>
-        <span v-if="product.isEco" class="badge badge-eco">🌿 Bio</span>
+        <span v-if="product.isEco" class="badge badge-eco">Bio</span>
         <span v-if="product.discount" class="badge badge-discount">
           -{{ product.discount }}%
         </span>
@@ -39,7 +39,7 @@
       
       <div v-if="!product.inStock" class="out-of-stock-overlay">
         <div class="out-of-stock-content">
-          <span class="out-of-stock-icon">⚠️</span>
+          <span class="out-of-stock-icon">!</span>
           <span class="out-of-stock-text">Rupture de stock</span>
         </div>
       </div>
@@ -47,7 +47,7 @@
       <div class="rating-badge">
         <span class="rating-stars">
           <span v-for="star in 5" :key="star" class="star" :class="{ filled: star <= Math.floor(product.rating) }">
-            ⭐
+            ★
           </span>
         </span>
         <span class="rating-value">{{ product.rating.toFixed(1) }}</span>
@@ -61,7 +61,7 @@
           :aria-label="product.isFavorite ? 'Retirer des favoris' : 'Ajouter aux favoris'"
         >
           <span :class="{ 'text-error': product.isFavorite }">
-            {{ product.isFavorite ? '❤️' : '🤍' }}
+            {{ product.isFavorite ? '♥' : '♡' }}
           </span>
         </button>
         
@@ -70,7 +70,7 @@
           @click.stop="$emit('quick-view', product)"
           aria-label="Aperçu rapide du produit"
         >
-          👁️
+          <span class="eye-icon">👁</span>
         </button>
       </div>
     </div>
@@ -86,12 +86,8 @@
         <p class="product-description">{{ truncatedDescription }}</p>
         <div class="product-meta">
           <span class="product-artisan">
-            <span class="artisan-icon">👨‍🎨</span>
+            <span class="artisan-icon">✓</span>
             Par {{ product.artisan }}
-          </span>
-          <span v-if="product.location" class="product-location">
-            <span class="location-icon">📍</span>
-            {{ product.location }}
           </span>
         </div>
       </div>
@@ -112,7 +108,6 @@
             :class="{ 'btn-danger': !product.inStock }"
             :aria-label="product.inStock ? 'Ajouter au panier' : 'Produit indisponible'"
           >
-            <span class="btn-icon">{{ product.inStock ? '🛒' : '❌' }}</span>
             <span class="btn-text">
               {{ product.inStock ? 'Ajouter' : 'Indisponible' }}
             </span>
@@ -175,7 +170,7 @@ const { imageLoaded, imageError, handleImageLoad, handleImageError, getOptimized
 
 // Computed pour l'URL optimisée de l'image
 const optimizedImageUrl = computed(() => {
-  return getOptimizedImageUrl(props.product.image, 450, 320)
+  return getOptimizedImageUrl(props.product.image, 300, 200)
 })
 
 // Computed pour tronquer la description
@@ -206,22 +201,24 @@ function handleAddToCart() {
   height: 100%;
   cursor: pointer;
   transition: all var(--transition-normal);
-  border-radius: var(--border-radius-xl);
+  border-radius: 12px;
   overflow: hidden;
-  background: var(--background-primary);
+  background: var(--white);
   position: relative;
   display: flex;
   flex-direction: column;
+  border: 1px solid var(--border-color);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
 .product-card:hover {
-  transform: translateY(-8px) scale(1.02);
-  box-shadow: var(--shadow-2xl);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
 }
 
 .product-card:focus {
   outline: none;
-  box-shadow: 0 0 0 3px rgba(45, 90, 61, 0.3);
+  box-shadow: 0 0 0 3px rgba(71, 85, 105, 0.3);
 }
 
 .product-card.out-of-stock {
@@ -231,9 +228,9 @@ function handleAddToCart() {
 
 .product-image {
   position: relative;
-  height: 280px;
+  height: 200px;
   overflow: hidden;
-  background: var(--background-secondary);
+  background: #f1f5f9;
   flex-shrink: 0;
 }
 
@@ -246,7 +243,7 @@ function handleAddToCart() {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--background-secondary);
+  background: #f1f5f9;
 }
 
 .product-image img {
@@ -281,28 +278,28 @@ function handleAddToCart() {
 
 .badge {
   padding: var(--spacing-sm) var(--spacing-md);
-  border-radius: var(--border-radius-xl);
+  border-radius: 20px;
   font-size: 0.75rem;
-  font-weight: var(--font-weight-semibold);
+  font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.05em;
   backdrop-filter: blur(8px);
-  box-shadow: var(--shadow-sm);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .badge-new {
-  background: var(--info-color);
-  color: var(--background-primary);
+  background: var(--primary-color);
+  color: var(--white);
 }
 
 .badge-eco {
-  background: var(--success-color);
-  color: var(--background-primary);
+  background: var(--secondary-color);
+  color: var(--white);
 }
 
 .badge-discount {
   background: var(--accent-color);
-  color: var(--background-primary);
+  color: var(--white);
 }
 
 .out-of-stock-overlay {
@@ -358,18 +355,18 @@ function handleAddToCart() {
 
 .star {
   font-size: 0.875rem;
-  filter: grayscale(100%);
-  transition: filter var(--transition-fast);
+  color: #cbd5e1;
+  transition: color var(--transition-fast);
 }
 
 .star.filled {
-  filter: grayscale(0%);
+  color: #f59e0b;
 }
 
 .rating-value {
   font-size: 0.875rem;
-  font-weight: var(--font-weight-medium);
-  color: var(--text-secondary);
+  font-weight: 500;
+  color: var(--text-dark);
 }
 
 .quick-actions {
@@ -395,18 +392,30 @@ function handleAddToCart() {
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(8px);
-  border: none;
+  border: 1px solid rgba(203, 213, 225, 0.5);
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 1.2rem;
-  box-shadow: var(--shadow-sm);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   transition: all var(--transition-fast);
+  color: #475569;
 }
 
 .quick-action-btn:hover {
   transform: scale(1.1);
-  box-shadow: var(--shadow-md);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  background: rgba(255, 255, 255, 1);
+  color: #334155;
+}
+
+/* Styles spécifiques pour les icônes des boutons d'action */
+.quick-action-btn .text-error {
+  color: #dc2626 !important;
+}
+
+.quick-action-btn:hover .text-error {
+  color: #b91c1c !important;
 }
 
 /* Informations du produit */
@@ -419,7 +428,7 @@ function handleAddToCart() {
 }
 
 .product-header {
-  border-bottom: 1px solid var(--border-light);
+  border-bottom: 1px solid var(--border-color);
   padding-bottom: var(--spacing-md);
   flex-shrink: 0;
 }
@@ -455,19 +464,18 @@ function handleAddToCart() {
 
 .product-name {
   font-size: 1.25rem;
-  font-weight: var(--font-weight-semibold);
-  color: var(--text-primary);
+  font-weight: 600;
+  color: var(--text-dark);
   margin-bottom: var(--spacing-sm);
   line-height: 1.3;
-  font-family: var(--font-family-serif);
 }
 
 .product-category {
   font-size: 0.875rem;
-  color: var(--text-muted);
+  color: var(--text-light);
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  font-weight: var(--font-weight-medium);
+  font-weight: 500;
   margin: 0;
 }
 
@@ -479,7 +487,7 @@ function handleAddToCart() {
 }
 
 .product-description {
-  color: var(--text-secondary);
+  color: var(--text-light);
   font-size: 0.95rem;
   line-height: 1.5;
   margin: 0;
@@ -497,12 +505,12 @@ function handleAddToCart() {
   align-items: center;
   gap: var(--spacing-sm);
   font-size: 0.875rem;
-  color: var(--text-muted);
+  color: var(--text-light);
 }
 
 .product-artisan {
   color: var(--primary-color);
-  font-weight: var(--font-weight-medium);
+  font-weight: 500;
 }
 
 .artisan-icon,
@@ -516,7 +524,7 @@ function handleAddToCart() {
   align-items: flex-end;
   gap: var(--spacing-md);
   padding-top: var(--spacing-md);
-  border-top: 1px solid var(--border-light);
+  border-top: 1px solid var(--border-color);
 }
 
 .product-pricing {
@@ -527,15 +535,14 @@ function handleAddToCart() {
 
 .original-price {
   font-size: 0.875rem;
-  color: var(--text-muted);
+  color: var(--text-light);
   text-decoration: line-through;
 }
 
 .product-price {
   font-size: 1.5rem;
-  font-weight: var(--font-weight-bold);
+  font-weight: 700;
   color: var(--primary-color);
-  font-family: var(--font-family-serif);
 }
 
 .product-actions {
@@ -551,16 +558,21 @@ function handleAddToCart() {
   gap: var(--spacing-sm);
   font-size: 0.875rem;
   padding: var(--spacing-md) var(--spacing-lg);
-  border-radius: var(--border-radius-lg);
-  font-weight: var(--font-weight-medium);
+  border-radius: 8px;
+  font-weight: 600;
   transition: all var(--transition-fast);
   width: 100%;
-  min-height: 44px; /* Assurer une hauteur minimale pour l'accessibilité */
+  min-height: 44px;
+  border: 2px solid var(--primary-color);
+  background: var(--primary-color);
+  color: var(--white);
 }
 
 .add-to-cart-btn:hover:not(:disabled) {
   transform: translateY(-2px);
-  box-shadow: var(--shadow-lg);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  background: var(--accent-color);
+  border-color: var(--accent-color);
 }
 
 .add-to-cart-btn:disabled {
@@ -602,21 +614,21 @@ function handleAddToCart() {
 
 .quality-fill {
   height: 100%;
-  background: var(--success-color);
+  background: var(--primary-color);
   transition: width var(--transition-slow);
 }
 
 .quality-text {
   font-size: 0.75rem;
-  color: var(--text-muted);
-  font-weight: var(--font-weight-medium);
+  color: var(--text-light);
+  font-weight: 500;
   white-space: nowrap;
 }
 
 /* Responsive */
 @media (max-width: 768px) {
   .product-image {
-    height: 240px;
+    height: 180px;
   }
   
   .product-info {
@@ -659,7 +671,7 @@ function handleAddToCart() {
 
 @media (max-width: 480px) {
   .product-image {
-    height: 200px;
+    height: 160px;
   }
   
   .product-info {

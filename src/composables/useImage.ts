@@ -23,11 +23,11 @@ export function useImage(): UseImageReturn {
     
     const target = event.target as HTMLImageElement
     if (target) {
-      // URLs de fallback de qualité
+      // URLs de fallback de qualité avec nouveau thème
       const fallbackImages = [
-        'https://via.placeholder.com/400x300/4CAF50/white?text=EcoMarket',
-        'https://via.placeholder.com/400x300/81C784/white?text=Produit+Eco',
-        'https://via.placeholder.com/400x300/A5D6A7/white?text=Artisanal'
+        'https://via.placeholder.com/400x300/64748b/white?text=EcoMarket',
+        'https://via.placeholder.com/400x300/94a3b8/white?text=Produit+Eco',
+        'https://via.placeholder.com/400x300/cbd5e1/334155?text=Artisanal'
       ]
       
       // Choisir une image de fallback aléatoire pour plus de variété
@@ -36,7 +36,7 @@ export function useImage(): UseImageReturn {
     }
   }
 
-  function getOptimizedImageUrl(url: string, width: number = 400, height: number = 300): string {
+  function getOptimizedImageUrl(url: string, width: number = 300, height: number = 200): string {
     // Si c'est une URL Unsplash, on peut l'optimiser
     if (url.includes('unsplash.com')) {
       // Enlever les paramètres existants et ajouter les nouveaux
@@ -75,23 +75,23 @@ export function preloadImage(src: string): Promise<void> {
 // Liste d'images de haute qualité pour les produits
 export const highQualityProductImages = {
   cosmétiques: [
-    'https://images.unsplash.com/photo-1556228720-195a672e8a03?w=400&h=300&fit=crop',
-    'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=300&fit=crop',
-    'https://images.unsplash.com/photo-1584305574647-0cc949a2bb9f?w=400&h=300&fit=crop'
+    'https://images.unsplash.com/photo-1556228720-195a672e8a03?w=300&h=200&fit=crop',
+    'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=300&h=200&fit=crop',
+    'https://images.unsplash.com/photo-1584305574647-0cc949a2bb9f?w=300&h=200&fit=crop'
   ],
   accessoires: [
-    'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=400&h=300&fit=crop',
-    'https://images.unsplash.com/photo-1570213489059-0aac6626cade?w=400&h=300&fit=crop',
-    'https://images.unsplash.com/photo-1544966503-7cc5ac882d5f?w=400&h=300&fit=crop'
+    'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=300&h=200&fit=crop',
+    'https://images.unsplash.com/photo-1570213489059-0aac6626cade?w=300&h=200&fit=crop',
+    'https://images.unsplash.com/photo-1544966503-7cc5ac882d5f?w=300&h=200&fit=crop'
   ],
   alimentation: [
-    'https://images.unsplash.com/photo-1587049352846-4a222e784d38?w=400&h=300&fit=crop',
-    'https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=400&h=300&fit=crop',
-    'https://images.unsplash.com/photo-1506368083636-6defb67639a7?w=400&h=300&fit=crop'
+    'https://images.unsplash.com/photo-1587049352846-4a222e784d38?w=300&h=200&fit=crop',
+    'https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=300&h=200&fit=crop',
+    'https://images.unsplash.com/photo-1506368083636-6defb67639a7?w=300&h=200&fit=crop'
   ],
   décoration: [
-    'https://images.unsplash.com/photo-1602874801007-83f6e90a3a36?w=400&h=300&fit=crop',
-    'https://images.unsplash.com/photo-1527613426441-4da17471b66d?w=400&h=300&fit=crop',
-    'https://images.unsplash.com/photo-1586263352805-b5b1b8084d9c?w=400&h=300&fit=crop'
+    'https://images.unsplash.com/photo-1602874801007-83f6e90a3a36?w=300&h=200&fit=crop',
+    'https://images.unsplash.com/photo-1527613426441-4da17471b66d?w=300&h=200&fit=crop',
+    'https://images.unsplash.com/photo-1586263352805-b5b1b8084d9c?w=300&h=200&fit=crop'
   ]
 }
