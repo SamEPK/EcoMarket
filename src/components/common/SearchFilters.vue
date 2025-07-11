@@ -63,7 +63,8 @@
       
       <!-- Bouton reset -->
       <button @click="resetFilters" class="reset-btn">
-        🔄 Réinitialiser
+        <RotateCcw :size="16" />
+        Réinitialiser
       </button>
     </div>
     
@@ -75,6 +76,8 @@
 </template>
 
 <script setup>
+import { RotateCcw } from 'lucide-vue-next'
+
 // Props avec v-model
 const props = defineProps({
   modelValue: {
@@ -262,11 +265,22 @@ function resetFilters() {
   font-weight: 500;
   transition: all 0.3s ease;
   white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .reset-btn:hover {
   background: #e68900;
   transform: scale(1.05);
+}
+
+.reset-btn svg {
+  transition: transform 0.3s ease;
+}
+
+.reset-btn:hover svg {
+  transform: rotate(-180deg);
 }
 
 .results-info {
