@@ -342,7 +342,7 @@ async function sendMessage() {
 /* Hero Section */
 .hero-section {
   background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-  color: var(--white);
+  color: #ffffff;
   padding: 4rem 0;
   text-align: center;
 }
@@ -351,6 +351,7 @@ async function sendMessage() {
   font-size: 3rem;
   margin-bottom: 1.5rem;
   font-weight: bold;
+  color: #ffffff;
 }
 
 .hero-subtitle {
@@ -358,13 +359,14 @@ async function sendMessage() {
   max-width: 800px;
   margin: 0 auto;
   line-height: 1.6;
-  opacity: 0.9;
+  color: #ffffff;
+  opacity: 0.95;
 }
 
 /* Notre Histoire */
 .story-section {
   padding: 4rem 0;
-  background: var(--white);
+  background: #ffffff;
 }
 
 .story-content {
@@ -409,7 +411,7 @@ async function sendMessage() {
 }
 
 .value-card {
-  background: var(--white);
+  background: #ffffff;
   padding: 2rem;
   border-radius: 12px;
   text-align: center;
@@ -441,7 +443,7 @@ async function sendMessage() {
 /* Notre Engagement */
 .commitment-section {
   padding: 4rem 0;
-  background: var(--white);
+  background: #ffffff;
 }
 
 .commitment-content {
@@ -526,7 +528,7 @@ async function sendMessage() {
 }
 
 .team-member {
-  background: var(--white);
+  background: #ffffff;
   padding: 2rem;
   border-radius: 12px;
   text-align: center;
@@ -560,7 +562,7 @@ async function sendMessage() {
 /* Contact */
 .contact-section {
   padding: 4rem 0;
-  background: var(--white);
+  background: #ffffff;
 }
 
 .contact-content {
@@ -635,7 +637,7 @@ async function sendMessage() {
   border: 1px solid var(--border-color);
   border-radius: 6px;
   font-size: 1rem;
-  background: var(--white);
+  background: #ffffff;
   transition: border-color 0.3s ease;
 }
 
@@ -653,7 +655,7 @@ async function sendMessage() {
 .submit-btn {
   width: 100%;
   background: var(--primary-color);
-  color: var(--white);
+  color: #ffffff;
   border: none;
   padding: 0.75rem 1.5rem;
   border-radius: 6px;

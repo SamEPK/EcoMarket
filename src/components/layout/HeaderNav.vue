@@ -30,6 +30,7 @@
         <!-- Panier et menu burger -->
         <div class="nav-actions">
           <RouterLink to="/cart" class="cart-link">
+            <span class="cart-icon">🛒</span>
             <span v-if="cartItemCount > 0" class="cart-badge">
               {{ cartItemCount }}
             </span>

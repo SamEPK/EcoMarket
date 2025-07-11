@@ -287,7 +287,7 @@ onMounted(() => {
 /* Section Valeurs */
 .values-section {
   padding: 4rem 0;
-  background: var(--white);
+  background: #ffffff;
 }
 
 .values-grid {
@@ -361,14 +361,14 @@ onMounted(() => {
 
 .view-all-btn:hover {
   background: var(--primary-color);
-  color: var(--white);
+  color: #ffffff;
 }
 
 /* Section Newsletter */
 .newsletter-section {
   padding: 4rem 0;
   background: var(--primary-color);
-  color: var(--white);
+  color: #ffffff;
 }
 
 .newsletter-content {
@@ -380,12 +380,14 @@ onMounted(() => {
 .newsletter-content h2 {
   font-size: 2rem;
   margin-bottom: 1rem;
+  color: #ffffff;
 }
 
 .newsletter-content p {
   font-size: 1.1rem;
   margin-bottom: 2rem;
-  opacity: 0.9;
+  color: #ffffff;
+  opacity: 0.95;
 }
 
 .newsletter-form {
@@ -410,7 +412,7 @@ onMounted(() => {
 
 .newsletter-btn {
   background: var(--accent-color);
-  color: var(--white);
+  color: #ffffff;
   border: none;
   padding: 0.75rem 1.5rem;
   border-radius: 6px;
@@ -437,13 +439,15 @@ onMounted(() => {
 }
 
 .subscription-message.success {
-  background: rgba(76, 175, 80, 0.2);
-  color: #2e7d32;
+  background: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
 .subscription-message.error {
-  background: rgba(244, 67, 54, 0.2);
-  color: #c62828;
+  background: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
 /* Responsive */

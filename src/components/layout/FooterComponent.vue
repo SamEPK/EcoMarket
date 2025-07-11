@@ -82,7 +82,7 @@ function filterByCategory(category) {
 <style scoped>
 .footer {
   background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-  color: var(--white);
+  color: #ffffff;
   margin-top: auto;
 }
 
@@ -100,13 +100,13 @@ function filterByCategory(category) {
 }
 
 .footer-section h3 {
-  color: var(--white);
+  color: #ffffff;
   margin-bottom: 1rem;
   font-size: 1.5rem;
 }
 
 .footer-section h4 {
-  color: var(--white);
+  color: #ffffff;
   margin-bottom: 1rem;
   font-size: 1.2rem;
 }
@@ -114,7 +114,8 @@ function filterByCategory(category) {
 .footer-section p {
   line-height: 1.6;
   margin-bottom: 1rem;
-  opacity: 0.9;
+  color: #ffffff;
+  opacity: 0.95;
 }
 
 .footer-links {
@@ -127,9 +128,9 @@ function filterByCategory(category) {
 }
 
 .footer-links a {
-  color: var(--white);
+  color: #ffffff;
   text-decoration: none;
-  opacity: 0.9;
+  opacity: 0.95;
   transition: opacity 0.3s ease;
 }
 
@@ -167,6 +168,8 @@ function filterByCategory(category) {
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  color: #ffffff;
+  opacity: 0.95;
 }
 
 .footer-bottom {
@@ -177,7 +180,8 @@ function filterByCategory(category) {
 
 .footer-bottom p {
   margin: 0.25rem 0;
-  opacity: 0.8;
+  color: #ffffff;
+  opacity: 0.9;
 }
 
 .footer-note {
