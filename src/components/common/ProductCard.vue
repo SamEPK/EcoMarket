@@ -39,7 +39,9 @@
       
       <div v-if="!product.inStock" class="out-of-stock-overlay">
         <div class="out-of-stock-content">
-          <span class="out-of-stock-icon">!</span>
+          <span class="out-of-stock-icon">
+            <AlertCircle :size="48" />
+          </span>
           <span class="out-of-stock-text">Rupture de stock</span>
         </div>
       </div>
@@ -47,7 +49,7 @@
       <div class="rating-badge">
         <span class="rating-stars">
           <span v-for="star in 5" :key="star" class="star" :class="{ filled: star <= Math.floor(product.rating) }">
-            ★
+            <Star :size="14" :fill="star <= Math.floor(product.rating) ? 'currentColor' : 'none'" />
           </span>
         </span>
         <span class="rating-value">{{ product.rating.toFixed(1) }}</span>
@@ -59,10 +61,9 @@
           class="btn btn-sm btn-ghost quick-action-btn"
           @click.stop="$emit('toggle-favorite', product)"
           :aria-label="product.isFavorite ? 'Retirer des favoris' : 'Ajouter aux favoris'"
+          :class="{ 'favorite-active': product.isFavorite }"
         >
-          <span :class="{ 'text-error': product.isFavorite }">
-            {{ product.isFavorite ? '♥' : '♡' }}
-          </span>
+          <Heart :size="16" :fill="product.isFavorite ? 'currentColor' : 'none'" />
         </button>
         
         <button 
@@ -70,7 +71,7 @@
           @click.stop="$emit('quick-view', product)"
           aria-label="Aperçu rapide du produit"
         >
-          <span class="eye-icon">👁</span>
+          <Eye :size="16" />
         </button>
       </div>
     </div>
@@ -86,7 +87,7 @@
         <p class="product-description">{{ truncatedDescription }}</p>
         <div class="product-meta">
           <span class="product-artisan">
-            <span class="artisan-icon">✓</span>
+            <CheckCircle :size="16" />
             Par {{ product.artisan }}
           </span>
         </div>
@@ -111,6 +112,7 @@
             <span class="btn-text">
               {{ product.inStock ? 'Ajouter' : 'Indisponible' }}
             </span>
+            <ShoppingCart :size="16" class="btn-icon" />
           </button>
         </div>
       </footer>
@@ -131,6 +133,7 @@
 
 <script setup>
 import { computed } from 'vue'
+import { Heart, Eye, CheckCircle, ShoppingCart, AlertCircle, Star } from 'lucide-vue-next'
 import { useImage } from '@/composables/useImage'
 
 // Props avec validation étendue
@@ -321,7 +324,7 @@ function handleAddToCart() {
 }
 
 .out-of-stock-icon {
-  font-size: 3rem;
+  color: #ffffff;
   display: block;
   margin-bottom: var(--spacing-sm);
 }
@@ -354,7 +357,6 @@ function handleAddToCart() {
 }
 
 .star {
-  font-size: 0.875rem;
   color: #cbd5e1;
   transition: color var(--transition-fast);
 }
@@ -400,6 +402,7 @@ function handleAddToCart() {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   transition: all var(--transition-fast);
   color: #475569;
+  cursor: pointer;
 }
 
 .quick-action-btn:hover {
@@ -409,13 +412,13 @@ function handleAddToCart() {
   color: #334155;
 }
 
-/* Styles spécifiques pour les icônes des boutons d'action */
-.quick-action-btn .text-error {
-  color: #dc2626 !important;
+/* Style spécifique pour le bouton favori actif */
+.quick-action-btn.favorite-active {
+  color: #dc2626;
 }
 
-.quick-action-btn:hover .text-error {
-  color: #b91c1c !important;
+.quick-action-btn.favorite-active:hover {
+  color: #b91c1c;
 }
 
 /* Informations du produit */

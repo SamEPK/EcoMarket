@@ -4,7 +4,7 @@
       <div class="nav-container">
         <!-- Logo et titre -->
         <RouterLink to="/" class="nav-brand">
-          <span class="logo">🌱</span>
+          <Leaf :size="24" />
           <span class="brand-text">EcoMarket</span>
         </RouterLink>
         
@@ -30,7 +30,7 @@
         <!-- Panier et menu burger -->
         <div class="nav-actions">
           <RouterLink to="/cart" class="cart-link">
-            <span class="cart-icon">🛒</span>
+            <ShoppingCart :size="20" />
             <span v-if="cartItemCount > 0" class="cart-badge">
               {{ cartItemCount }}
             </span>
@@ -54,6 +54,7 @@
 <script setup>
 import { ref, computed } from 'vue'
 import { RouterLink } from 'vue-router'
+import { ShoppingCart, Leaf } from 'lucide-vue-next'
 import { useCartStore } from '@/stores/cartStore'
 
 // État du menu mobile

@@ -35,10 +35,12 @@
           <!-- Actions du panier -->
           <div class="cart-actions">
             <button @click="clearCart" class="clear-cart-btn">
-              🗑️ Vider le panier
+              <Trash2 :size="16" />
+              Vider le panier
             </button>
             <RouterLink to="/products" class="continue-shopping">
-              ← Continuer mes achats
+              <ArrowLeft :size="16" />
+              Continuer mes achats
             </RouterLink>
           </div>
         </div>
@@ -64,7 +66,9 @@
             </div>
 
             <div class="eco-message">
-              <span class="eco-icon">🌱</span>
+              <span class="eco-icon">
+                <Leaf :size="20" />
+              </span>
               <p>Livraison éco-responsable incluse</p>
             </div>
 
@@ -73,7 +77,9 @@
             </RouterLink>
 
             <div class="secure-payment">
-              <span class="secure-icon">🔒</span>
+              <span class="secure-icon">
+                <Shield :size="16" />
+              </span>
               <span>Paiement 100% sécurisé</span>
             </div>
           </div>
@@ -86,6 +92,7 @@
 <script setup>
 import { computed } from 'vue'
 import { RouterLink } from 'vue-router'
+import { Trash2, ArrowLeft, Leaf, Shield } from 'lucide-vue-next'
 import { useCartStore } from '@/stores/cartStore'
 import CartItem from '@/components/cart/CartItem.vue'
 
@@ -236,6 +243,9 @@ function clearCart() {
   cursor: pointer;
   font-size: 0.9rem;
   transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .clear-cart-btn:hover {
@@ -248,6 +258,9 @@ function clearCart() {
   text-decoration: none;
   font-weight: 500;
   transition: color 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .continue-shopping:hover {
@@ -307,7 +320,7 @@ function clearCart() {
 }
 
 .eco-icon {
-  font-size: 1.2rem;
+  color: var(--primary-color);
 }
 
 .eco-message p {

@@ -53,7 +53,9 @@
         <h2 class="section-title">Nos Valeurs</h2>
         <div class="values-grid">
           <div class="value-card">
-            <div class="value-icon">🌱</div>
+            <div class="value-icon">
+              <Leaf :size="48" />
+            </div>
             <h3>Écologie</h3>
             <p>
               Nous privilégions les produits fabriqués avec des matériaux naturels, 
@@ -63,7 +65,9 @@
           </div>
           
           <div class="value-card">
-            <div class="value-icon">🎨</div>
+            <div class="value-icon">
+              <Palette :size="48" />
+            </div>
             <h3>Artisanat</h3>
             <p>
               Nous soutenons les artisans locaux en valorisant leur savoir-faire 
@@ -72,7 +76,9 @@
           </div>
           
           <div class="value-card">
-            <div class="value-icon">🤝</div>
+            <div class="value-icon">
+              <Handshake :size="48" />
+            </div>
             <h3>Équité</h3>
             <p>
               Nous garantissons une rémunération juste aux artisans et des conditions 
@@ -81,7 +87,9 @@
           </div>
           
           <div class="value-card">
-            <div class="value-icon">🏠</div>
+            <div class="value-icon">
+              <Home :size="48" />
+            </div>
             <h3>Local</h3>
             <p>
               Nous favorisons les circuits courts et les producteurs locaux pour 
@@ -100,7 +108,9 @@
             <h2>Notre Engagement Environnemental</h2>
             <div class="engagement-list">
               <div class="engagement-item">
-                <span class="engagement-icon">📦</span>
+                <span class="engagement-icon">
+                  <Package :size="32" />
+                </span>
                 <div>
                   <h4>Emballages éco-responsables</h4>
                   <p>Tous nos emballages sont recyclables ou compostables</p>
@@ -108,7 +118,9 @@
               </div>
               
               <div class="engagement-item">
-                <span class="engagement-icon">🚚</span>
+                <span class="engagement-icon">
+                  <Truck :size="32" />
+                </span>
                 <div>
                   <h4>Livraison neutre en carbone</h4>
                   <p>Compensation carbone pour toutes nos livraisons</p>
@@ -116,7 +128,9 @@
               </div>
               
               <div class="engagement-item">
-                <span class="engagement-icon">♻️</span>
+                <span class="engagement-icon">
+                  <Recycle :size="32" />
+                </span>
                 <div>
                   <h4>Programme de recyclage</h4>
                   <p>Reprise et recyclage des emballages usagés</p>
@@ -124,7 +138,9 @@
               </div>
               
               <div class="engagement-item">
-                <span class="engagement-icon">🌳</span>
+                <span class="engagement-icon">
+                  <TreePine :size="32" />
+                </span>
                 <div>
                   <h4>Reforestation</h4>
                   <p>1 arbre planté pour chaque commande passée</p>
@@ -160,7 +176,9 @@
         <h2 class="section-title">Notre Équipe</h2>
         <div class="team-grid">
           <div class="team-member">
-            <div class="member-avatar">👨‍💻</div>
+            <div class="member-avatar">
+              <User :size="64" />
+            </div>
             <h4>Samuel</h4>
             <p class="member-role">Développeur & Co-fondateur</p>
             <p class="member-description">
@@ -170,7 +188,9 @@
           </div>
           
           <div class="team-member">
-            <div class="member-avatar">👩‍🎨</div>
+            <div class="member-avatar">
+              <User :size="64" />
+            </div>
             <h4>Marie</h4>
             <p class="member-role">Designer & Co-fondatrice</p>
             <p class="member-description">
@@ -180,7 +200,9 @@
           </div>
           
           <div class="team-member">
-            <div class="member-avatar">👨‍💼</div>
+            <div class="member-avatar">
+              <User :size="64" />
+            </div>
             <h4>Thomas</h4>
             <p class="member-role">Business & Co-fondateur</p>
             <p class="member-description">
@@ -274,6 +296,7 @@
 
 <script setup>
 import { ref } from 'vue'
+import { Leaf, Palette, Handshake, Home, Package, Truck, Recycle, TreePine, User } from 'lucide-vue-next'
 
 // État du formulaire de contact
 const contactForm = ref({
@@ -424,8 +447,10 @@ async function sendMessage() {
 }
 
 .value-icon {
-  font-size: 3rem;
   margin-bottom: 1rem;
+  color: var(--primary-color);
+  display: flex;
+  justify-content: center;
 }
 
 .value-card h3 {
@@ -473,7 +498,7 @@ async function sendMessage() {
 }
 
 .engagement-icon {
-  font-size: 2rem;
+  color: var(--primary-color);
   margin-top: 0.25rem;
 }
 
@@ -536,8 +561,10 @@ async function sendMessage() {
 }
 
 .member-avatar {
-  font-size: 4rem;
   margin-bottom: 1rem;
+  color: var(--primary-color);
+  display: flex;
+  justify-content: center;
 }
 
 .team-member h4 {

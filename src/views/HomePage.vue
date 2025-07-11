@@ -37,22 +37,30 @@
         <h2 class="section-title">Nos valeurs</h2>
         <div class="values-grid">
           <div class="value-card">
-            <div class="value-icon">🌱</div>
+            <div class="value-icon">
+              <Leaf :size="48" />
+            </div>
             <h3>Écologique</h3>
             <p>Produits respectueux de l'environnement et durables</p>
           </div>
           <div class="value-card">
-            <div class="value-icon">🎨</div>
+            <div class="value-icon">
+              <Palette :size="48" />
+            </div>
             <h3>Artisanal</h3>
             <p>Créations uniques faites main par des artisans passionnés</p>
           </div>
           <div class="value-card">
-            <div class="value-icon">🏘️</div>
+            <div class="value-icon">
+              <Home :size="48" />
+            </div>
             <h3>Local</h3>
             <p>Soutien à l'économie locale et aux producteurs de notre région</p>
           </div>
           <div class="value-card">
-            <div class="value-icon">💚</div>
+            <div class="value-icon">
+              <Heart :size="48" />
+            </div>
             <h3>Éthique</h3>
             <p>Commerce équitable et pratiques responsables</p>
           </div>
@@ -114,6 +122,7 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue'
 import { RouterLink, useRouter } from 'vue-router'
+import { Leaf, Palette, Home, Heart } from 'lucide-vue-next'
 import { useProductsStore } from '@/stores/productsStore'
 import { useCartStore } from '@/stores/cartStore'
 import ProductCard from '@/components/common/ProductCard.vue'
@@ -309,8 +318,10 @@ onMounted(() => {
 }
 
 .value-icon {
-  font-size: 3rem;
   margin-bottom: 1rem;
+  color: var(--primary-color);
+  display: flex;
+  justify-content: center;
 }
 
 .value-card h3 {

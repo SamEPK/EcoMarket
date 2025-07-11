@@ -274,7 +274,9 @@
             </div>
 
             <div class="eco-badge">
-              <span class="eco-icon">🌱</span>
+              <span class="eco-icon">
+                <Leaf :size="24" />
+              </span>
               <div>
                 <p><strong>Commande éco-responsable</strong></p>
                 <p>Emballage recyclable et livraison neutre en carbone</p>
@@ -290,6 +292,7 @@
 <script setup>
 import { computed, onMounted } from 'vue'
 import { useRouter, RouterLink } from 'vue-router'
+import { Leaf } from 'lucide-vue-next'
 import { useCartStore } from '@/stores/cartStore'
 import { useForm } from '@/composables/useForm'
 

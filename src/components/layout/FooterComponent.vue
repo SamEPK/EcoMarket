@@ -11,9 +11,15 @@
             Soutenons ensemble l'économie locale et durable.
           </p>
           <div class="social-links">
-            <a href="#" class="social-link">📘</a>
-            <a href="#" class="social-link">📷</a>
-            <a href="#" class="social-link">🐦</a>
+            <a href="#" class="social-link">
+              <Facebook :size="20" />
+            </a>
+            <a href="#" class="social-link">
+              <Instagram :size="20" />
+            </a>
+            <a href="#" class="social-link">
+              <Twitter :size="20" />
+            </a>
           </div>
         </div>
         
@@ -43,9 +49,18 @@
         <div class="footer-section">
           <h4>Contact</h4>
           <div class="contact-info">
-            <p>contact@ecomarket.fr</p>
-            <p>01 23 45 67 89</p>
-            <p>123 Rue Verte, 75001 Paris</p>
+            <p>
+              <Mail :size="16" />
+              contact@ecomarket.fr
+            </p>
+            <p>
+              <Phone :size="16" />
+              01 23 45 67 89
+            </p>
+            <p>
+              <MapPin :size="16" />
+              123 Rue Verte, 75001 Paris
+            </p>
           </div>
         </div>
       </div>
@@ -64,6 +79,7 @@
 <script setup>
 import { computed } from 'vue'
 import { RouterLink, useRouter } from 'vue-router'
+import { Facebook, Instagram, Twitter, Mail, Phone, MapPin } from 'lucide-vue-next'
 import { useProductsStore } from '@/stores/productsStore'
 
 const router = useRouter()

@@ -57,7 +57,7 @@
         class="remove-btn"
         title="Supprimer cet article"
       >
-        🗑️
+        <Trash2 :size="16" />
       </button>
     </div>
   </div>
@@ -65,6 +65,7 @@
 
 <script setup>
 import { computed } from 'vue'
+import { Trash2 } from 'lucide-vue-next'
 
 // Props
 const props = defineProps({
