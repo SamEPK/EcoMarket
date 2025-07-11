@@ -54,26 +54,6 @@
         </span>
         <span class="rating-value">{{ product.rating.toFixed(1) }}</span>
       </div>
-      
-      <!-- Actions rapides -->
-      <div class="quick-actions">
-        <button 
-          class="btn btn-sm btn-ghost quick-action-btn"
-          @click.stop="$emit('toggle-favorite', product)"
-          :aria-label="product.isFavorite ? 'Retirer des favoris' : 'Ajouter aux favoris'"
-          :class="{ 'favorite-active': product.isFavorite }"
-        >
-          <span class="heart-icon" :class="{ 'filled': product.isFavorite }">♥</span>
-        </button>
-        
-        <button 
-          class="btn btn-sm btn-ghost quick-action-btn"
-          @click.stop="$emit('quick-view', product)"
-          aria-label="Aperçu rapide du produit"
-        >
-          <span class="eye-icon">👁</span>
-        </button>
-      </div>
     </div>
     
     <!-- Informations du produit -->
@@ -133,7 +113,7 @@
 
 <script setup>
 import { computed } from 'vue'
-import { Heart, Eye, CheckCircle, ShoppingCart, AlertCircle, Star } from 'lucide-vue-next'
+import { CheckCircle, ShoppingCart, AlertCircle, Star } from 'lucide-vue-next'
 import { useImage } from '@/composables/useImage'
 
 // Props avec validation étendue
@@ -163,9 +143,7 @@ const props = defineProps({
 // Events émis
 const emit = defineEmits([
   'click', 
-  'add-to-cart', 
-  'toggle-favorite', 
-  'quick-view'
+  'add-to-cart'
 ])
 
 // Composable pour la gestion des images
@@ -369,83 +347,6 @@ function handleAddToCart() {
   font-size: 0.875rem;
   font-weight: 500;
   color: var(--text-dark);
-}
-
-.quick-actions {
-  position: absolute;
-  bottom: var(--spacing-md);
-  right: var(--spacing-md);
-  display: flex;
-  gap: var(--spacing-sm);
-  opacity: 0;
-  transform: translateY(20px);
-  transition: all var(--transition-normal);
-  z-index: 2;
-}
-
-.product-card:hover .quick-actions {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.quick-action-btn {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background: rgba(0, 0, 0, 0.7);
-  backdrop-filter: blur(8px);
-  border: 1px solid rgba(0, 0, 0, 0.8);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.2rem;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-  transition: all var(--transition-fast);
-  color: #ffffff;
-  cursor: pointer;
-}
-
-.quick-action-btn:hover {
-  transform: scale(1.1);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
-  background: rgba(0, 0, 0, 0.9);
-  color: #ffffff;
-}
-
-/* Style spécifique pour le bouton favori actif */
-.quick-action-btn.favorite-active {
-  background: rgba(255, 255, 255, 0.95);
-  border-color: rgba(255, 68, 68, 0.3);
-}
-
-.quick-action-btn.favorite-active .heart-icon {
-  color: #ff4444;
-}
-
-.quick-action-btn.favorite-active:hover {
-  background: rgba(255, 255, 255, 1);
-}
-
-.quick-action-btn.favorite-active:hover .heart-icon {
-  color: #ff2222;
-}
-
-/* Styles pour les icônes de fallback */
-.heart-icon {
-  font-size: 16px;
-  display: inline-block;
-  color: inherit;
-  transition: all var(--transition-fast);
-}
-
-.heart-icon.filled {
-  color: #ff4444;
-}
-
-.eye-icon {
-  font-size: 16px;
-  display: inline-block;
-  color: inherit;
 }
 
 /* Informations du produit */
@@ -685,14 +586,6 @@ function handleAddToCart() {
     padding: var(--spacing-lg);
   }
   
-  .quick-actions {
-    position: static;
-    opacity: 1;
-    transform: none;
-    justify-content: center;
-    margin-top: var(--spacing-md);
-  }
-  
   .quality-indicator {
     position: static;
     margin-top: var(--spacing-md);
@@ -752,7 +645,6 @@ function handleAddToCart() {
 @media (prefers-reduced-motion: reduce) {
   .product-card,
   .product-image img,
-  .quick-actions,
   .quality-fill {
     transition: none !important;
     animation: none !important;
@@ -771,10 +663,6 @@ function handleAddToCart() {
 @media (prefers-color-scheme: dark) {
   .rating-badge,
   .quality-indicator {
-    background: rgba(15, 23, 42, 0.95);
-  }
-  
-  .quick-action-btn {
     background: rgba(15, 23, 42, 0.95);
   }
   

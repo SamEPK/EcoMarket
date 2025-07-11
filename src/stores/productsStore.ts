@@ -105,17 +105,6 @@ export const useProductsStore = defineStore('products', () => {
           artisan: "Rucher des Collines"
         },
         {
-          id: 104,
-          name: "Bougie en cire d'abeille",
-          description: "Bougie naturelle parfumée aux huiles essentielles, longue durée de combustion.",
-          price: 18.50,
-          image: "https://images.unsplash.com/photo-1602874801007-83f6e90a3a36?w=400&h=300&fit=crop&crop=center&auto=format&q=80",
-          category: "Décoration",
-          inStock: true,
-          rating: 4.7,
-          artisan: "Luminances Naturelles"
-        },
-        {
           id: 105,
           name: "Thé vert bio des montagnes",
           description: "Thé vert cultivé en agriculture biologique en haute altitude, riche en antioxydants.",

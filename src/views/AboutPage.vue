@@ -183,7 +183,7 @@
             <p class="member-role">Développeur & Co-fondateur</p>
             <p class="member-description">
               Passionné de développement web et d'écologie, Samuel s'occupe 
-              de la partie technique de la plateforme.
+              de la partie technique de la plateforme et de l'architecture système.
             </p>
           </div>
           
@@ -191,11 +191,11 @@
             <div class="member-avatar">
               <User :size="64" />
             </div>
-            <h4>Marie</h4>
-            <p class="member-role">Designer & Co-fondatrice</p>
+            <h4>Fouad</h4>
+            <p class="member-role">Designer & Co-fondateur</p>
             <p class="member-description">
-              Experte en UX/UI et amoureuse de l'artisanat, Marie conçoit 
-              l'expérience utilisateur de notre plateforme.
+              Expert en UX/UI et passionné d'artisanat, Fouad conçoit 
+              l'expérience utilisateur et l'identité visuelle de notre plateforme.
             </p>
           </div>
           
@@ -203,11 +203,11 @@
             <div class="member-avatar">
               <User :size="64" />
             </div>
-            <h4>Thomas</h4>
+            <h4>Quentin</h4>
             <p class="member-role">Business & Co-fondateur</p>
             <p class="member-description">
-              Spécialiste du développement commercial, Thomas s'occupe des 
-              relations avec nos artisans partenaires.
+              Spécialiste du développement commercial et des partenariats, Quentin 
+              s'occupe des relations avec nos artisans partenaires.
             </p>
           </div>
         </div>
