@@ -10,7 +10,9 @@
           placeholder="Rechercher un produit..."
           class="search-input"
         />
-        <span class="search-icon">🔍</span>
+        <span class="search-icon">
+          <Search :size="20" />
+        </span>
       </div>
     </div>
     
@@ -76,7 +78,7 @@
 </template>
 
 <script setup>
-import { RotateCcw } from 'lucide-vue-next'
+import { RotateCcw, Search } from 'lucide-vue-next'
 
 // Props avec v-model
 const props = defineProps({
@@ -186,6 +188,9 @@ function resetFilters() {
   transform: translateY(-50%);
   font-size: 1.2rem;
   color: var(--text-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .filters-row {
