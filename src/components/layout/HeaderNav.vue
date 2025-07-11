@@ -154,15 +154,13 @@ function closeMenu() {
   position: relative;
   text-decoration: none;
   padding: 0.5rem;
-  border-radius: 50%;
-  background-color: var(--secondary-color);
-  color: var(--white);
+  color: var(--text-dark);
   font-size: 1.2rem;
   transition: all 0.3s ease;
 }
 
 .cart-link:hover {
-  background-color: var(--primary-color);
+  color: var(--primary-color);
   transform: scale(1.1);
 }
 

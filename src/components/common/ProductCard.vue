@@ -63,7 +63,7 @@
           :aria-label="product.isFavorite ? 'Retirer des favoris' : 'Ajouter aux favoris'"
           :class="{ 'favorite-active': product.isFavorite }"
         >
-          <Heart :size="16" :fill="product.isFavorite ? 'currentColor' : 'none'" />
+          <span class="heart-icon" :class="{ 'filled': product.isFavorite }">♥</span>
         </button>
         
         <button 
@@ -71,7 +71,7 @@
           @click.stop="$emit('quick-view', product)"
           aria-label="Aperçu rapide du produit"
         >
-          <Eye :size="16" />
+          <span class="eye-icon">👁</span>
         </button>
       </div>
     </div>
@@ -392,33 +392,60 @@ function handleAddToCart() {
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.95);
+  background: rgba(0, 0, 0, 0.7);
   backdrop-filter: blur(8px);
-  border: 1px solid rgba(203, 213, 225, 0.5);
+  border: 1px solid rgba(0, 0, 0, 0.8);
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 1.2rem;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
   transition: all var(--transition-fast);
-  color: #475569;
+  color: #ffffff;
   cursor: pointer;
 }
 
 .quick-action-btn:hover {
   transform: scale(1.1);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
-  background: rgba(255, 255, 255, 1);
-  color: #334155;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+  background: rgba(0, 0, 0, 0.9);
+  color: #ffffff;
 }
 
 /* Style spécifique pour le bouton favori actif */
 .quick-action-btn.favorite-active {
-  color: #dc2626;
+  background: rgba(255, 255, 255, 0.95);
+  border-color: rgba(255, 68, 68, 0.3);
+}
+
+.quick-action-btn.favorite-active .heart-icon {
+  color: #ff4444;
 }
 
 .quick-action-btn.favorite-active:hover {
-  color: #b91c1c;
+  background: rgba(255, 255, 255, 1);
+}
+
+.quick-action-btn.favorite-active:hover .heart-icon {
+  color: #ff2222;
+}
+
+/* Styles pour les icônes de fallback */
+.heart-icon {
+  font-size: 16px;
+  display: inline-block;
+  color: inherit;
+  transition: all var(--transition-fast);
+}
+
+.heart-icon.filled {
+  color: #ff4444;
+}
+
+.eye-icon {
+  font-size: 16px;
+  display: inline-block;
+  color: inherit;
 }
 
 /* Informations du produit */
