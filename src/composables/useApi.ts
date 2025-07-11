@@ -15,7 +15,7 @@ interface UseApiReturn {
 export function useApi(): UseApiReturn {
   const loading = ref<boolean>(false)
   const error = ref<string | null>(null)
-  
+
   /**
    * Fonction générique pour faire des appels API
    * @param url - URL de l'API
@@ -24,13 +24,13 @@ export function useApi(): UseApiReturn {
   async function fetchData<T = any>(url: string, options: AxiosRequestConfig = {}): Promise<T> {
     loading.value = true
     error.value = null
-    
+
     try {
       const response: AxiosResponse<T> = await axios(url, {
         timeout: 10000,
         ...options
       })
-      
+
       return response.data
     } catch (err: any) {
       error.value = err.message || 'Une erreur est survenue'
@@ -39,7 +39,7 @@ export function useApi(): UseApiReturn {
       loading.value = false
     }
   }
-  
+
   /**
    * Fonction pour simuler des appels API avec des données mockées
    * @param data - Données à retourner
@@ -48,7 +48,7 @@ export function useApi(): UseApiReturn {
   async function mockApiCall<T = any>(data: T, delay: number = 500): Promise<T> {
     loading.value = true
     error.value = null
-    
+
     try {
       await new Promise(resolve => setTimeout(resolve, delay))
       return data
@@ -59,7 +59,7 @@ export function useApi(): UseApiReturn {
       loading.value = false
     }
   }
-  
+
   return {
     loading,
     error,

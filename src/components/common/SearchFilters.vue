@@ -1,6 +1,6 @@
 <template>
   <div class="search-filters">
-    <!-- Barre de recherche -->
+
     <div class="search-bar">
       <div class="search-input-wrapper">
         <input
@@ -15,10 +15,9 @@
         </span>
       </div>
     </div>
-    
-    <!-- Filtres -->
+
     <div class="filters-row">
-      <!-- Filtre par catégorie -->
+
       <div class="filter-group">
         <label for="category-select">Catégorie :</label>
         <select
@@ -37,8 +36,7 @@
           </option>
         </select>
       </div>
-      
-      <!-- Filtre par prix -->
+
       <div class="filter-group">
         <label>Prix :</label>
         <div class="price-range">
@@ -62,15 +60,13 @@
           <span class="currency">€</span>
         </div>
       </div>
-      
-      <!-- Bouton reset -->
+
       <button @click="resetFilters" class="reset-btn">
         <RotateCcw :size="16" />
         Réinitialiser
       </button>
     </div>
-    
-    <!-- Compteur de résultats -->
+
     <div class="results-info">
       <p>{{ resultCount }} produit{{ resultCount > 1 ? 's' : '' }} trouvé{{ resultCount > 1 ? 's' : '' }}</p>
     </div>
@@ -78,9 +74,7 @@
 </template>
 
 <script setup>
-import { RotateCcw, Search } from 'lucide-vue-next'
-
-// Props avec v-model
+import { RotateCcw, Search } from 'lucide-vue-next'
 const props = defineProps({
   modelValue: {
     type: Object,
@@ -103,9 +97,7 @@ const props = defineProps({
 })
 
 // Emit pour v-model
-const emit = defineEmits(['update:modelValue', 'reset'])
-
-// Méthodes pour mettre à jour les filtres
+const emit = defineEmits(['update:modelValue', 'reset'])
 function updateSearch(event) {
   emit('update:modelValue', {
     ...props.modelValue,
@@ -294,27 +286,25 @@ function resetFilters() {
   font-size: 0.9rem;
   padding-top: 1rem;
   border-top: 1px solid var(--border-color);
-}
-
-/* Responsive */
+}
 @media (max-width: 768px) {
   .search-filters {
     padding: 1rem;
   }
-  
+
   .filters-row {
     flex-direction: column;
     align-items: stretch;
   }
-  
+
   .filter-group {
     min-width: auto;
   }
-  
+
   .price-range {
     justify-content: center;
   }
-  
+
   .reset-btn {
     align-self: center;
     width: fit-content;

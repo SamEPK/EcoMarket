@@ -1,9 +1,9 @@
 <template>
   <footer class="footer">
     <div class="footer-container">
-      <!-- Section principale -->
+
       <div class="footer-content">
-        <!-- À propos -->
+
         <div class="footer-section">
           <h3>EcoMarket</h3>
           <p>
@@ -22,8 +22,7 @@
             </a>
           </div>
         </div>
-        
-        <!-- Liens rapides -->
+
         <div class="footer-section">
           <h4>Liens rapides</h4>
           <ul class="footer-links">
@@ -33,8 +32,7 @@
             <li><a href="#contact">Contact</a></li>
           </ul>
         </div>
-        
-        <!-- Catégories -->
+
         <div class="footer-section">
           <h4>Catégories</h4>
           <ul class="footer-links">
@@ -44,8 +42,7 @@
             <li><a href="#" @click="filterByCategory('Décoration')">Décoration</a></li>
           </ul>
         </div>
-        
-        <!-- Contact -->
+
         <div class="footer-section">
           <h4>Contact</h4>
           <div class="contact-info">
@@ -64,8 +61,7 @@
           </div>
         </div>
       </div>
-      
-      <!-- Copyright -->
+
       <div class="footer-bottom">
         <p>&copy; {{ currentYear }} EcoMarket. Tous droits réservés.</p>
         <p class="footer-note">
@@ -208,19 +204,17 @@ function filterByCategory(category) {
 .footer-note {
   font-style: italic;
   font-size: 0.9rem;
-}
-
-/* Responsive */
+}
 @media (max-width: 768px) {
   .footer-content {
     grid-template-columns: 1fr;
     gap: 1.5rem;
   }
-  
+
   .footer-section {
     text-align: center;
   }
-  
+
   .social-links {
     justify-content: center;
   }

@@ -1,13 +1,12 @@
 <template>
   <div class="cart-page">
     <div class="container">
-      <!-- En-tête -->
+
       <div class="page-header">
         <h1>Mon Panier</h1>
         <p v-if="!isEmpty">{{ itemCount }} article{{ itemCount > 1 ? 's' : '' }} dans votre panier</p>
       </div>
 
-      <!-- Panier vide -->
       <div v-if="isEmpty" class="empty-cart">
         <div class="empty-cart-content">
           <h2>Votre panier est vide</h2>
@@ -18,10 +17,9 @@
         </div>
       </div>
 
-      <!-- Contenu du panier -->
       <div v-else class="cart-content">
         <div class="cart-items">
-          <!-- Liste des articles -->
+
           <div class="items-list">
             <CartItem
               v-for="item in items"
@@ -32,7 +30,6 @@
             />
           </div>
 
-          <!-- Actions du panier -->
           <div class="cart-actions">
             <button @click="clearCart" class="clear-cart-btn">
               <Trash2 :size="16" />
@@ -45,21 +42,20 @@
           </div>
         </div>
 
-        <!-- Résumé de la commande -->
         <div class="order-summary">
           <div class="summary-card">
             <h3>Résumé de la commande</h3>
-            
+
             <div class="summary-line">
               <span>Sous-total ({{ itemCount }} articles)</span>
               <span>{{ formatPrice(totalPrice) }}</span>
             </div>
-            
+
             <div class="summary-line">
               <span>Livraison</span>
               <span class="free-shipping">Gratuite</span>
             </div>
-            
+
             <div class="summary-line total">
               <span>Total</span>
               <span>{{ formatPrice(totalPrice) }}</span>
@@ -96,15 +92,11 @@ import { Trash2, ArrowLeft, Leaf, Shield } from 'lucide-vue-next'
 import { useCartStore } from '@/stores/cartStore'
 import CartItem from '@/components/cart/CartItem.vue'
 
-const cartStore = useCartStore()
-
-// Computed properties du panier
+const cartStore = useCartStore()
 const items = computed(() => cartStore.items)
 const itemCount = computed(() => cartStore.itemCount)
 const totalPrice = computed(() => cartStore.totalPrice)
-const isEmpty = computed(() => cartStore.isEmpty)
-
-// Méthodes
+const isEmpty = computed(() => cartStore.isEmpty)
 function formatPrice(price) {
   return new Intl.NumberFormat('fr-FR', {
     style: 'currency',
@@ -138,9 +130,7 @@ function clearCart() {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 1rem;
-}
-
-/* En-tête */
+}
 .page-header {
   text-align: center;
   margin-bottom: 3rem;
@@ -204,9 +194,7 @@ function clearCart() {
 .continue-shopping-btn:hover {
   background: #45a049;
   transform: translateY(-2px);
-}
-
-/* Contenu du panier */
+}
 .cart-content {
   display: grid;
   grid-template-columns: 2fr 1fr;
@@ -265,9 +253,7 @@ function clearCart() {
 
 .continue-shopping:hover {
   color: var(--text-dark);
-}
-
-/* Résumé de commande */
+}
 .order-summary {
   position: sticky;
   top: 2rem;
@@ -360,15 +346,13 @@ function clearCart() {
 
 .secure-icon {
   color: var(--success-color);
-}
-
-/* Responsive */
+}
 @media (max-width: 968px) {
   .cart-content {
     grid-template-columns: 1fr;
     gap: 2rem;
   }
-  
+
   .order-summary {
     position: static;
   }
@@ -378,22 +362,22 @@ function clearCart() {
   .cart-page {
     padding: 1rem 0;
   }
-  
+
   .page-header h1 {
     font-size: 2rem;
   }
-  
+
   .cart-items,
   .summary-card {
     padding: 1rem;
   }
-  
+
   .cart-actions {
     flex-direction: column;
     gap: 1rem;
     align-items: stretch;
   }
-  
+
   .continue-shopping {
     text-align: center;
   }

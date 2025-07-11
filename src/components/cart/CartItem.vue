@@ -1,32 +1,30 @@
 <template>
   <div class="cart-item">
-    <!-- Image du produit -->
+
     <div class="item-image">
-      <img 
-        :src="item.image" 
+      <img
+        :src="item.image"
         :alt="item.name"
         @error="handleImageError"
       />
     </div>
 
-    <!-- Informations du produit -->
     <div class="item-info">
       <h3 class="item-name">{{ item.name }}</h3>
       <p class="item-price">{{ formatPrice(item.price) }} / unité</p>
     </div>
 
-    <!-- Contrôles de quantité -->
     <div class="item-quantity">
       <label class="quantity-label">Quantité :</label>
       <div class="quantity-controls">
-        <button 
+        <button
           @click="decreaseQuantity"
           :disabled="item.quantity <= 1"
           class="quantity-btn"
         >
           -
         </button>
-        <input 
+        <input
           :value="item.quantity"
           @input="updateQuantity"
           type="number"
@@ -34,7 +32,7 @@
           max="10"
           class="quantity-input"
         />
-        <button 
+        <button
           @click="increaseQuantity"
           :disabled="item.quantity >= 10"
           class="quantity-btn"
@@ -44,15 +42,13 @@
       </div>
     </div>
 
-    <!-- Prix total de l'article -->
     <div class="item-total">
       <span class="total-label">Total :</span>
       <span class="total-price">{{ formatPrice(itemTotal) }}</span>
     </div>
 
-    <!-- Bouton de suppression -->
     <div class="item-actions">
-      <button 
+      <button
         @click="confirmRemove"
         class="remove-btn"
         title="Supprimer cet article"
@@ -65,15 +61,13 @@
 
 <script setup>
 import { computed } from 'vue'
-import { Trash2 } from 'lucide-vue-next'
-
-// Props
+import { Trash2 } from 'lucide-vue-next'
 const props = defineProps({
   item: {
     type: Object,
     required: true,
     validator: (item) => {
-      return item && 
+      return item &&
              typeof item.id !== 'undefined' &&
              typeof item.name === 'string' &&
              typeof item.price === 'number' &&
@@ -83,12 +77,8 @@ const props = defineProps({
 })
 
 // Émissions d'événements
-const emit = defineEmits(['update-quantity', 'remove-item'])
-
-// Computed
-const itemTotal = computed(() => props.item.price * props.item.quantity)
-
-// Méthodes
+const emit = defineEmits(['update-quantity', 'remove-item'])
+const itemTotal = computed(() => props.item.price * props.item.quantity)
 function formatPrice(price) {
   return new Intl.NumberFormat('fr-FR', {
     style: 'currency',
@@ -160,7 +150,7 @@ function confirmRemove() {
   color: var(--text-dark);
   margin-bottom: 0.25rem;
   line-height: 1.3;
-  
+
   /* Gestion du débordement de texte */
   overflow: hidden;
   text-overflow: ellipsis;
@@ -252,9 +242,7 @@ function confirmRemove() {
   font-size: 1.1rem;
   font-weight: bold;
   color: var(--primary-color);
-}
-
-/* Actions */
+}
 .item-actions {
   text-align: center;
 }
@@ -274,9 +262,7 @@ function confirmRemove() {
   background: var(--error-color);
   color: var(--white);
   transform: scale(1.1);
-}
-
-/* Responsive */
+}
 @media (max-width: 768px) {
   .cart-item {
     grid-template-columns: 60px 1fr;
@@ -288,43 +274,43 @@ function confirmRemove() {
     gap: 0.75rem;
     padding: 1rem 0;
   }
-  
+
   .item-image {
     grid-area: image;
   }
-  
+
   .item-info {
     grid-area: info;
   }
-  
+
   .item-quantity {
     grid-area: quantity;
     text-align: left;
     min-width: auto;
   }
-  
+
   .item-total {
     grid-area: total;
     text-align: right;
     min-width: auto;
   }
-  
+
   .item-actions {
     grid-area: actions;
     text-align: center;
     padding-top: 0.5rem;
     border-top: 1px solid var(--border-color);
   }
-  
+
   .item-image img {
     width: 60px;
     height: 60px;
   }
-  
+
   .item-name {
     font-size: 1rem;
   }
-  
+
   .quantity-controls {
     justify-content: flex-start;
   }
@@ -337,7 +323,7 @@ function confirmRemove() {
     text-overflow: initial;
     line-height: 1.4;
   }
-  
+
   .quantity-label,
   .total-label {
     font-size: 0.8rem;

@@ -1,7 +1,7 @@
 <template>
   <div class="checkout-page">
     <div class="container">
-      <!-- En-tête -->
+
       <div class="page-header">
         <h1>Finaliser ma commande</h1>
         <div class="checkout-steps">
@@ -29,7 +29,6 @@
         </div>
       </div>
 
-      <!-- Redirection si panier vide -->
       <div v-if="cartEmpty" class="empty-cart-message">
         <h2>Votre panier est vide</h2>
         <p>Ajoutez des produits à votre panier avant de procéder au paiement.</p>
@@ -38,13 +37,12 @@
         </RouterLink>
       </div>
 
-      <!-- Contenu du checkout -->
       <div v-else class="checkout-content">
-        <!-- Étape 1: Informations -->
+
         <div v-show="currentStep === 1" class="step-content">
           <div class="checkout-form">
             <h2>Informations de livraison</h2>
-            
+
             <form @submit.prevent="goToPayment">
               <div class="form-group">
                 <label for="firstName">Prénom *</label>
@@ -106,7 +104,7 @@
                     required
                   />
                 </div>
-                
+
                 <div class="form-group">
                   <label for="city">Ville *</label>
                   <input
@@ -120,7 +118,6 @@
                 </div>
               </div>
 
-              <!-- Options de livraison -->
               <div class="form-section">
                 <h3>Options de livraison</h3>
                 <div class="delivery-options">
@@ -136,7 +133,7 @@
                       <p>3-5 jours ouvrés</p>
                     </div>
                   </label>
-                  
+
                   <label class="delivery-option">
                     <input
                       v-model="customerInfo.deliveryMethod"
@@ -152,7 +149,6 @@
                 </div>
               </div>
 
-              <!-- Actions -->
               <div class="form-actions">
                 <button
                   type="submit"
@@ -165,11 +161,10 @@
           </div>
         </div>
 
-        <!-- Étape 2: Paiement -->
         <div v-show="currentStep === 2" class="step-content">
           <div class="checkout-form">
             <h2>Informations de paiement</h2>
-            
+
             <form @submit.prevent="goToConfirmation">
               <div class="form-group">
                 <label for="cardNumber">Numéro de carte *</label>
@@ -207,7 +202,7 @@
                     required
                   />
                 </div>
-                
+
                 <div class="form-group">
                   <label for="cvv">CVV *</label>
                   <input
@@ -221,7 +216,6 @@
                 </div>
               </div>
 
-              <!-- Actions -->
               <div class="form-actions">
                 <button
                   type="button"
@@ -241,11 +235,10 @@
           </div>
         </div>
 
-        <!-- Étape 3: Confirmation -->
         <div v-show="currentStep === 3" class="step-content">
           <div class="checkout-form">
             <h2>Confirmation de commande</h2>
-            
+
             <div class="confirmation-section">
               <h3>Informations de livraison</h3>
               <div class="info-display">
@@ -265,7 +258,6 @@
               </div>
             </div>
 
-            <!-- Actions -->
             <div class="form-actions">
               <button
                 type="button"
@@ -285,14 +277,13 @@
           </div>
         </div>
 
-        <!-- Résumé de commande -->
         <div class="order-summary">
           <div class="summary-card">
             <h3>Résumé de votre commande</h3>
-            
+
             <div class="summary-items">
-              <div 
-                v-for="item in cartItems" 
+              <div
+                v-for="item in cartItems"
                 :key="item.id"
                 class="summary-item"
               >
@@ -316,12 +307,6 @@
               </div>
             </div>
 
-            <!-- Debug Info -->
-            <div class="debug-section" style="margin-top: 2rem; padding: 1rem; background: #f8f9fa; border-radius: 8px; font-size: 0.9rem;">
-              <p><strong>Étape actuelle:</strong> {{ currentStep }}</p>
-              <p><strong>Info valides:</strong> {{ isCustomerInfoValid }}</p>
-              <p><strong>Paiement valide:</strong> {{ isPaymentInfoValid }}</p>
-            </div>
           </div>
         </div>
       </div>
@@ -342,11 +327,9 @@ const cartStore = useCartStore()
 const ordersStore = useOrdersStore()
 const { showNotification } = useNotifications()
 
-// État principal
 const currentStep = ref(1)
 const isSubmitting = ref(false)
 
-// Données du client
 const customerInfo = reactive({
   firstName: '',
   lastName: '',
@@ -357,7 +340,6 @@ const customerInfo = reactive({
   deliveryMethod: 'standard'
 })
 
-// Données de paiement
 const paymentInfo = reactive({
   cardNumber: '',
   cardName: '',
@@ -365,7 +347,6 @@ const paymentInfo = reactive({
   cvv: ''
 })
 
-// Computed properties
 const cartEmpty = computed(() => cartStore.isEmpty)
 const cartItems = computed(() => cartStore.items)
 const cartTotal = computed(() => cartStore.totalPrice)
@@ -398,55 +379,42 @@ const isPaymentInfoValid = computed(() => {
          paymentInfo.cvv.trim() !== ''
 })
 
-// Méthodes de navigation
-function goToPayment() {
-  console.log('Tentative de passage au paiement...')
+function goToPayment() {
   console.log('Informations valides:', isCustomerInfoValid.value)
-  
+
   if (isCustomerInfoValid.value) {
-    currentStep.value = 2
-    console.log('Navigation vers étape 2 réussie!')
+    currentStep.value = 2
     showNotification('Informations sauvegardées', 'success')
-  } else {
-    console.log('Validation échouée')
+  } else {
     showNotification('Veuillez remplir tous les champs obligatoires', 'error')
   }
 }
 
-function goBackToInfo() {
-  console.log('Retour aux informations')
+function goBackToInfo() {
   currentStep.value = 1
 }
 
-function goToConfirmation() {
-  console.log('Tentative de passage à la confirmation...')
+function goToConfirmation() {
   console.log('Paiement valide:', isPaymentInfoValid.value)
-  
+
   if (isPaymentInfoValid.value) {
-    currentStep.value = 3
-    console.log('Navigation vers étape 3 réussie!')
+    currentStep.value = 3
     showNotification('Informations de paiement sauvegardées', 'success')
-  } else {
-    console.log('Validation paiement échouée')
+  } else {
     showNotification('Veuillez remplir toutes les informations de paiement', 'error')
   }
 }
 
-function goBackToPayment() {
-  console.log('Retour au paiement')
+function goBackToPayment() {
   currentStep.value = 2
 }
 
 async function confirmOrder() {
   console.log('Confirmation de la commande...')
-  
+
   try {
-    isSubmitting.value = true
-    
-    // Simulation d'envoi de commande
-    await new Promise(resolve => setTimeout(resolve, 2000))
-    
-    // Créer la commande dans l'historique
+    isSubmitting.value = true
+    await new Promise(resolve => setTimeout(resolve, 2000))
     const orderItems = cartItems.value.map(item => ({
       id: item.id,
       name: item.name,
@@ -454,7 +422,7 @@ async function confirmOrder() {
       quantity: item.quantity,
       image: item.image
     }))
-    
+
     const newOrder = ordersStore.addOrder({
       status: 'pending',
       total: grandTotal.value,
@@ -466,15 +434,11 @@ async function confirmOrder() {
         postalCode: customerInfo.postalCode,
         city: customerInfo.city
       }
-    })
-    
-    // Vider le panier
-    cartStore.clearCart()
-    
-    // Redirection vers page de succès
+    })
+    cartStore.clearCart()
     showNotification('Commande confirmée avec succès!', 'success')
     router.push('/order-success')
-    
+
   } catch (error) {
     console.error('Erreur lors de la confirmation:', error)
     showNotification('Erreur lors de la confirmation de la commande', 'error')
@@ -483,7 +447,6 @@ async function confirmOrder() {
   }
 }
 
-// Méthodes utilitaires
 function formatPrice(price) {
   return new Intl.NumberFormat('fr-FR', {
     style: 'currency',
@@ -510,9 +473,7 @@ onMounted(() => {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 1rem;
-}
-
-/* En-tête */
+}
 .page-header {
   text-align: center;
   margin-bottom: 3rem;
@@ -582,9 +543,7 @@ onMounted(() => {
 
 .step-text {
   font-weight: 500;
-}
-
-/* Message panier vide */
+}
 .empty-cart-message {
   text-align: center;
   padding: 4rem 2rem;
@@ -614,9 +573,7 @@ onMounted(() => {
 .go-shopping-btn:hover {
   background: #45a049;
   transform: translateY(-2px);
-}
-
-/* Contenu checkout */
+}
 .checkout-content {
   display: grid;
   grid-template-columns: 2fr 1fr;
@@ -626,9 +583,7 @@ onMounted(() => {
 
 .step-content {
   grid-column: 1;
-}
-
-/* Formulaire */
+}
 .checkout-form {
   background: var(--white);
   border-radius: 12px;
@@ -682,9 +637,7 @@ onMounted(() => {
 .form-input:focus {
   outline: none;
   border-color: var(--primary-color);
-}
-
-/* Options de livraison */
+}
 .delivery-options {
   display: flex;
   flex-direction: column;
@@ -721,9 +674,7 @@ onMounted(() => {
   color: var(--text-light);
   margin: 0;
   font-size: 0.9rem;
-}
-
-/* Confirmation */
+}
 .confirmation-section {
   margin-bottom: 2rem;
 }
@@ -748,9 +699,7 @@ onMounted(() => {
 
 .info-display p:last-child {
   margin-bottom: 0;
-}
-
-/* Actions du formulaire */
+}
 .form-actions {
   margin-top: 2rem;
   padding-top: 2rem;
@@ -806,9 +755,7 @@ onMounted(() => {
 
 .back-btn:hover {
   background: var(--background-light);
-}
-
-/* Résumé de commande */
+}
 .order-summary {
   position: sticky;
   top: 2rem;
@@ -870,25 +817,21 @@ onMounted(() => {
   padding-top: 1rem;
   border-top: 1px solid var(--border-color);
   margin-top: 1rem;
-}
-
-/* Debug section */
+}
 .debug-section p {
   margin: 0.25rem 0;
   color: #666;
-}
-
-/* Responsive */
+}
 @media (max-width: 968px) {
   .checkout-content {
     grid-template-columns: 1fr;
     gap: 2rem;
   }
-  
+
   .step-content {
     grid-column: 1;
   }
-  
+
   .order-summary {
     position: static;
     grid-column: 1;
@@ -900,32 +843,32 @@ onMounted(() => {
   .checkout-page {
     padding: 1rem 0;
   }
-  
+
   .page-header h1 {
     font-size: 2rem;
   }
-  
+
   .checkout-steps {
     gap: 1rem;
   }
-  
+
   .checkout-steps::before {
     width: 150px;
   }
-  
+
   .step-text {
     display: none;
   }
-  
+
   .checkout-form,
   .summary-card {
     padding: 1.5rem;
   }
-  
+
   .form-row {
     grid-template-columns: 1fr;
   }
-  
+
   .form-actions {
     flex-direction: column;
   }

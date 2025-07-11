@@ -1,13 +1,12 @@
 <template>
   <div class="products-page">
     <div class="container">
-      <!-- En-tête de la page -->
+
       <div class="page-header">
         <h1>Nos Produits</h1>
         <p>Découvrez notre sélection de produits artisanaux et écologiques</p>
       </div>
 
-      <!-- Filtres de recherche -->
       <SearchFilters
         v-model=" filters"
         :categories="categories"
@@ -15,13 +14,11 @@
         @reset="handleResetFilters"
       />
 
-      <!-- État de chargement -->
       <div v-if="loading" class="loading-state">
         <div class="loading-spinner"></div>
         <p>Chargement des produits...</p>
       </div>
 
-      <!-- Message d'erreur -->
       <div v-else-if="error" class="error-state">
         <p>✗ {{ error }}</p>
         <button @click="retryLoading" class="retry-btn">
@@ -29,7 +26,6 @@
         </button>
       </div>
 
-      <!-- Liste des produits -->
       <div v-else-if="filteredProducts.length > 0" class="products-section">
         <div class="products-grid">
           <ProductCard
@@ -42,7 +38,6 @@
         </div>
       </div>
 
-      <!-- Aucun produit trouvé -->
       <div v-else class="no-products">
         <div class="no-products-content">
           <h3>Aucun produit trouvé</h3>
@@ -66,31 +61,23 @@ import SearchFilters from '@/components/common/SearchFilters.vue'
 
 const router = useRouter()
 const productsStore = useProductsStore()
-const cartStore = useCartStore()
-
-// État local pour les filtres (avec v-model)
+const cartStore = useCartStore()
 const filters = ref({
   searchTerm: '',
   category: '',
   minPrice: 0,
   maxPrice: 1000
-})
-
-// Computed properties
+})
 const loading = computed(() => productsStore.loading)
 const error = computed(() => productsStore.error)
 const filteredProducts = computed(() => productsStore.filteredProducts)
-const categories = computed(() => productsStore.categories)
-
-// Méthodes
+const categories = computed(() => productsStore.categories)
 function goToProductDetail(product) {
   router.push(`/product/${product.id}`)
 }
 
 function addToCart(product) {
-  cartStore.addItem(product)
-  
-  // Feedback visuel (toast notification pourrait être ajoutée)
+  cartStore.addItem(product)
   console.log(`${product.name} ajouté au panier`)
 }
 
@@ -105,22 +92,14 @@ function handleResetFilters() {
 
 function retryLoading() {
   productsStore.fetchProducts()
-}
-
-// Watchers
-// Synchronise les filtres locaux avec le store
+}
 watch(filters, (newFilters) => {
   productsStore.updateFilters(newFilters)
-}, { deep: true })
-
-// Lifecycle
-onMounted(async () => {
-  // Charge les produits si pas encore fait
+}, { deep: true })
+onMounted(async () => {
   if (productsStore.products.length === 0) {
     await productsStore.fetchProducts()
-  }
-  
-  // Synchronise les filtres du store avec l'état local
+  }
   filters.value = { ...productsStore.filters }
 })
 </script>
@@ -136,9 +115,7 @@ onMounted(async () => {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 1rem;
-}
-
-/* En-tête de la page */
+}
 .page-header {
   text-align: center;
   margin-bottom: 3rem;
@@ -262,28 +239,26 @@ onMounted(async () => {
 .reset-filters-btn:hover {
   background: var(--primary-color);
   transform: scale(1.05);
-}
-
-/* Responsive */
+}
 @media (max-width: 768px) {
   .products-page {
     padding: 1rem 0;
   }
-  
+
   .page-header {
     margin-bottom: 2rem;
     padding: 1rem 0;
   }
-  
+
   .page-header h1 {
     font-size: 2.5rem;
   }
-  
+
   .products-grid {
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: 1.5rem;
   }
-  
+
   .no-products {
     min-height: 300px;
   }
@@ -293,7 +268,7 @@ onMounted(async () => {
   .page-header h1 {
     font-size: 2rem;
   }
-  
+
   .products-grid {
     grid-template-columns: 1fr;
   }

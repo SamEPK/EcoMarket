@@ -1,27 +1,25 @@
 <template>
   <div class="optimized-image-container" :style="{ width, height }">
-    <!-- Loader pendant le chargement -->
+
     <div v-if="!imageLoaded && !imageError" class="image-loader">
       <div class="loader-spinner"></div>
     </div>
-    
-    <!-- Placeholder si erreur -->
+
     <div v-if="imageError" class="image-error">
       <div class="error-icon">📷</div>
       <p class="error-text">Image non disponible</p>
     </div>
-    
-    <!-- Image principale -->
-    <img 
+
+    <img
       v-show="!imageError"
-      :src="optimizedSrc" 
+      :src="optimizedSrc"
       :alt="alt"
       @load="handleImageLoad"
       @error="handleImageError"
-      :class="{ 
+      :class="{
         'optimized-image': true,
-        'image-loaded': imageLoaded, 
-        'image-hidden': !imageLoaded 
+        'image-loaded': imageLoaded,
+        'image-hidden': !imageLoaded
       }"
       loading="lazy"
       decoding="async"

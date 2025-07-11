@@ -29,23 +29,21 @@ export interface Order {
 
 export const useOrdersStore = defineStore('orders', () => {
   const orders = ref<Order[]>([])
-  
-  // Computed
+
   const totalOrders = computed(() => orders.value.length)
-  
+
   const recentOrders = computed(() => {
     return orders.value
       .sort((a, b) => b.date.getTime() - a.date.getTime())
       .slice(0, 5)
   })
-  
+
   const ordersByStatus = computed(() => {
     return (status: Order['status']) => {
       return orders.value.filter(order => order.status === status)
     }
   })
-  
-  // Actions
+
   function addOrder(orderData: Omit<Order, 'id' | 'number' | 'date'>) {
     const order: Order = {
       id: generateOrderId(),
@@ -53,38 +51,36 @@ export const useOrdersStore = defineStore('orders', () => {
       date: new Date(),
       ...orderData
     }
-    
+
     orders.value.unshift(order)
     return order
   }
-  
+
   function updateOrderStatus(orderId: string, status: Order['status']) {
     const order = orders.value.find(o => o.id === orderId)
     if (order) {
       order.status = status
     }
   }
-  
+
   function getOrderById(orderId: string) {
     return orders.value.find(o => o.id === orderId)
   }
-  
+
   function getOrderByNumber(orderNumber: string) {
     return orders.value.find(o => o.number === orderNumber)
   }
-  
-  // Méthodes utilitaires
+
   function generateOrderId() {
     return Date.now().toString() + Math.random().toString(36).substr(2, 9)
   }
-  
+
   function generateOrderNumber() {
     const year = new Date().getFullYear()
     const orderCount = orders.value.length + 1
     return `ECO-${year}-${orderCount.toString().padStart(3, '0')}`
   }
-  
-  // Initialiser avec des données d'exemple
+
   function initializeWithSampleData() {
     if (orders.value.length === 0) {
       const sampleOrders: Omit<Order, 'id' | 'number' | 'date'>[] = [
@@ -184,20 +180,19 @@ export const useOrdersStore = defineStore('orders', () => {
           }
         }
       ]
-      
-      // Ajouter les commandes d'exemple avec des dates différentes
+
       sampleOrders.forEach((orderData, index) => {
         const order: Order = {
           id: generateOrderId(),
           number: generateOrderNumber(),
-          date: new Date(Date.now() - (index * 5 * 24 * 60 * 60 * 1000)), // 5 jours d'écart
+          date: new Date(Date.now() - (index * 5 * 24 * 60 * 60 * 1000)),
           ...orderData
         }
         orders.value.push(order)
       })
     }
   }
-  
+
   return {
     orders,
     totalOrders,

@@ -2,13 +2,12 @@
   <header class="header">
     <nav class="navbar">
       <div class="nav-container">
-        <!-- Logo et titre -->
+
         <RouterLink to="/" class="nav-brand">
           <Leaf :size="24" />
           <span class="brand-text">EcoMarket</span>
         </RouterLink>
-        
-        <!-- Menu principal -->
+
         <ul class="nav-menu" :class="{ active: isMenuOpen }">
           <li class="nav-item">
             <RouterLink to="/" class="nav-link" @click="closeMenu">
@@ -31,8 +30,7 @@
             </RouterLink>
           </li>
         </ul>
-        
-        <!-- Panier et menu burger -->
+
         <div class="nav-actions">
           <RouterLink to="/cart" class="cart-link">
             <ShoppingCart :size="20" />
@@ -40,8 +38,8 @@
               {{ cartItemCount }}
             </span>
           </RouterLink>
-          
-          <button 
+
+          <button
             class="menu-toggle"
             @click="toggleMenu"
             :class="{ active: isMenuOpen }"
@@ -60,16 +58,12 @@
 import { ref, computed } from 'vue'
 import { RouterLink } from 'vue-router'
 import { ShoppingCart, Leaf } from 'lucide-vue-next'
-import { useCartStore } from '@/stores/cartStore'
-
-// État du menu mobile
+import { useCartStore } from '@/stores/cartStore'
 const isMenuOpen = ref(false)
 
 // Store du panier
 const cartStore = useCartStore()
-const cartItemCount = computed(() => cartStore.itemCount)
-
-// Méthodes pour le menu mobile
+const cartItemCount = computed(() => cartStore.itemCount)
 function toggleMenu() {
   isMenuOpen.value = !isMenuOpen.value
 }
@@ -146,9 +140,7 @@ function closeMenu() {
 .nav-link.router-link-active {
   background-color: var(--primary-color);
   color: var(--white);
-}
-
-/* Actions du nav (panier et menu) */
+}
 .nav-actions {
   display: flex;
   align-items: center;
@@ -217,14 +209,12 @@ function closeMenu() {
 
 .menu-toggle.active span:nth-child(3) {
   transform: rotate(-45deg) translate(7px, -6px);
-}
-
-/* Responsive */
+}
 @media (max-width: 768px) {
   .menu-toggle {
     display: flex;
   }
-  
+
   .nav-menu {
     position: fixed;
     top: 70px;
@@ -239,15 +229,15 @@ function closeMenu() {
     transition: left 0.3s ease;
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
   }
-  
+
   .nav-menu.active {
     left: 0;
   }
-  
+
   .nav-item {
     margin: 1rem 0;
   }
-  
+
   .nav-link {
     font-size: 1.2rem;
     padding: 1rem 2rem;

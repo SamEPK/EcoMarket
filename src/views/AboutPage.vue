@@ -1,44 +1,43 @@
 <template>
   <div class="about-page">
-    <!-- Hero Section -->
+
     <section class="hero-section">
       <div class="container">
         <div class="hero-content">
           <h1>À propos d'EcoMarket</h1>
           <p class="hero-subtitle">
-            Notre mission : promouvoir une consommation responsable en soutenant 
+            Notre mission : promouvoir une consommation responsable en soutenant
             les artisans locaux et les produits respectueux de l'environnement.
           </p>
         </div>
       </div>
     </section>
 
-    <!-- Notre Histoire -->
     <section class="story-section">
       <div class="container">
         <div class="story-content">
           <div class="story-text">
             <h2>Notre Histoire</h2>
             <p>
-              Née d'une passion pour l'artisanat local et le respect de l'environnement, 
-              EcoMarket a été créée en 2023 par une équipe d'étudiants convaincus qu'il 
+              Née d'une passion pour l'artisanat local et le respect de l'environnement,
+              EcoMarket a été créée en 2023 par une équipe d'étudiants convaincus qu'il
               était possible de consommer autrement.
             </p>
             <p>
-              Face à la standardisation des produits de grande distribution, nous avons 
-              souhaité créer une plateforme qui met en valeur les créateurs locaux et 
-              leurs savoir-faire traditionnels, tout en proposant des alternatives 
+              Face à la standardisation des produits de grande distribution, nous avons
+              souhaité créer une plateforme qui met en valeur les créateurs locaux et
+              leurs savoir-faire traditionnels, tout en proposant des alternatives
               écologiques aux consommateurs soucieux de l'environnement.
             </p>
             <p>
-              Aujourd'hui, EcoMarket rassemble plus de 50 artisans partenaires et propose 
-              une sélection rigoureuse de produits fabriqués dans le respect de 
+              Aujourd'hui, EcoMarket rassemble plus de 50 artisans partenaires et propose
+              une sélection rigoureuse de produits fabriqués dans le respect de
               l'environnement et des traditions artisanales.
             </p>
           </div>
           <div class="story-image">
-            <img 
-              src="https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=500" 
+            <img
+              src="https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=500"
               alt="Artisan au travail"
               class="story-img"
             />
@@ -47,7 +46,6 @@
       </div>
     </section>
 
-    <!-- Nos Valeurs -->
     <section class="values-section">
       <div class="container">
         <h2 class="section-title">Nos Valeurs</h2>
@@ -58,41 +56,41 @@
             </div>
             <h3>Écologie</h3>
             <p>
-              Nous privilégions les produits fabriqués avec des matériaux naturels, 
-              recyclés ou recyclables. Chaque produit est sélectionné pour son 
+              Nous privilégions les produits fabriqués avec des matériaux naturels,
+              recyclés ou recyclables. Chaque produit est sélectionné pour son
               impact environnemental réduit.
             </p>
           </div>
-          
+
           <div class="value-card">
             <div class="value-icon">
               <Palette :size="48" />
             </div>
             <h3>Artisanat</h3>
             <p>
-              Nous soutenons les artisans locaux en valorisant leur savoir-faire 
+              Nous soutenons les artisans locaux en valorisant leur savoir-faire
               unique et leurs créations originales. Chaque produit raconte une histoire.
             </p>
           </div>
-          
+
           <div class="value-card">
             <div class="value-icon">
               <Handshake :size="48" />
             </div>
             <h3>Équité</h3>
             <p>
-              Nous garantissons une rémunération juste aux artisans et des conditions 
+              Nous garantissons une rémunération juste aux artisans et des conditions
               de travail respectueuses. Le commerce équitable est au cœur de nos priorités.
             </p>
           </div>
-          
+
           <div class="value-card">
             <div class="value-icon">
               <Home :size="48" />
             </div>
             <h3>Local</h3>
             <p>
-              Nous favorisons les circuits courts et les producteurs locaux pour 
+              Nous favorisons les circuits courts et les producteurs locaux pour
               réduire l'empreinte carbone et dynamiser l'économie de proximité.
             </p>
           </div>
@@ -100,7 +98,6 @@
       </div>
     </section>
 
-    <!-- Notre Engagement -->
     <section class="commitment-section">
       <div class="container">
         <div class="commitment-content">
@@ -116,7 +113,7 @@
                   <p>Tous nos emballages sont recyclables ou compostables</p>
                 </div>
               </div>
-              
+
               <div class="engagement-item">
                 <span class="engagement-icon">
                   <Truck :size="32" />
@@ -126,7 +123,7 @@
                   <p>Compensation carbone pour toutes nos livraisons</p>
                 </div>
               </div>
-              
+
               <div class="engagement-item">
                 <span class="engagement-icon">
                   <Recycle :size="32" />
@@ -136,7 +133,7 @@
                   <p>Reprise et recyclage des emballages usagés</p>
                 </div>
               </div>
-              
+
               <div class="engagement-item">
                 <span class="engagement-icon">
                   <TreePine :size="32" />
@@ -170,7 +167,6 @@
       </div>
     </section>
 
-    <!-- Notre Équipe -->
     <section class="team-section">
       <div class="container">
         <h2 class="section-title">Notre Équipe</h2>
@@ -182,11 +178,11 @@
             <h4>Samuel</h4>
             <p class="member-role">Développeur & Co-fondateur</p>
             <p class="member-description">
-              Passionné de développement web et d'écologie, Samuel s'occupe 
+              Passionné de développement web et d'écologie, Samuel s'occupe
               de la partie technique de la plateforme et de l'architecture système.
             </p>
           </div>
-          
+
           <div class="team-member">
             <div class="member-avatar">
               <User :size="64" />
@@ -194,11 +190,11 @@
             <h4>Fouad</h4>
             <p class="member-role">Designer & Co-fondateur</p>
             <p class="member-description">
-              Expert en UX/UI et passionné d'artisanat, Fouad conçoit 
+              Expert en UX/UI et passionné d'artisanat, Fouad conçoit
               l'expérience utilisateur et l'identité visuelle de notre plateforme.
             </p>
           </div>
-          
+
           <div class="team-member">
             <div class="member-avatar">
               <User :size="64" />
@@ -206,7 +202,7 @@
             <h4>Quentin</h4>
             <p class="member-role">Business & Co-fondateur</p>
             <p class="member-description">
-              Spécialiste du développement commercial et des partenariats, Quentin 
+              Spécialiste du développement commercial et des partenariats, Quentin
               s'occupe des relations avec nos artisans partenaires.
             </p>
           </div>
@@ -214,19 +210,18 @@
       </div>
     </section>
 
-    <!-- Contact -->
     <section class="contact-section">
       <div class="container">
         <div class="contact-content">
           <div class="contact-info">
             <h2>Contactez-nous</h2>
             <p>
-              Vous avez des questions ? Vous souhaitez devenir partenaire ? 
+              Vous avez des questions ? Vous souhaitez devenir partenaire ?
               N'hésitez pas à nous contacter !
             </p>
-            
+
             <div class="contact-details">
-              
+
               <div class="contact-item">
                 <div>
                   <strong>Adresse</strong>
@@ -235,7 +230,7 @@
               </div>
             </div>
           </div>
-          
+
           <div class="contact-form">
             <h3>Envoyez-nous un message</h3>
             <form @submit.prevent="sendMessage">
@@ -248,7 +243,7 @@
                   class="form-input"
                 />
               </div>
-              
+
               <div class="form-group">
                 <input
                   v-model="contactForm.email"
@@ -258,7 +253,7 @@
                   class="form-input"
                 />
               </div>
-              
+
               <div class="form-group">
                 <input
                   v-model="contactForm.subject"
@@ -268,7 +263,7 @@
                   class="form-input"
                 />
               </div>
-              
+
               <div class="form-group">
                 <textarea
                   v-model="contactForm.message"
@@ -278,11 +273,11 @@
                   class="form-textarea"
                 ></textarea>
               </div>
-              
+
               <button type="submit" class="submit-btn" :disabled="isSubmitting">
                 {{ isSubmitting ? 'Envoi...' : 'Envoyer le message' }}
               </button>
-              
+
               <p v-if="submitMessage" class="submit-message" :class="messageType">
                 {{ submitMessage }}
               </p>
@@ -296,9 +291,7 @@
 
 <script setup>
 import { ref } from 'vue'
-import { Leaf, Palette, Handshake, Home, Package, Truck, Recycle, TreePine, User } from 'lucide-vue-next'
-
-// État du formulaire de contact
+import { Leaf, Palette, Handshake, Home, Package, Truck, Recycle, TreePine, User } from 'lucide-vue-next'
 const contactForm = ref({
   name: '',
   email: '',
@@ -314,15 +307,12 @@ const messageType = ref('')
 async function sendMessage() {
   isSubmitting.value = true
   submitMessage.value = ''
-  
-  try {
-    // Simulation d'un appel API
+
+  try {
     await new Promise(resolve => setTimeout(resolve, 1500))
-    
+
     submitMessage.value = 'Message envoyé avec succès ! Nous vous répondrons rapidement.'
-    messageType.value = 'success'
-    
-    // Reset du formulaire
+    messageType.value = 'success'
     contactForm.value = {
       name: '',
       email: '',
@@ -334,7 +324,7 @@ async function sendMessage() {
     messageType.value = 'error'
   } finally {
     isSubmitting.value = false
-    
+
     // Efface le message après 5 secondes
     setTimeout(() => {
       submitMessage.value = ''
@@ -638,9 +628,7 @@ async function sendMessage() {
   color: var(--text-light);
   margin: 0;
   line-height: 1.4;
-}
-
-/* Formulaire de contact */
+}
 .contact-form {
   background: var(--background-light);
   padding: 2rem;
@@ -716,9 +704,7 @@ async function sendMessage() {
 .submit-message.error {
   background: rgba(244, 67, 54, 0.1);
   color: var(--error-color);
-}
-
-/* Responsive */
+}
 @media (max-width: 968px) {
   .story-content,
   .commitment-content,
@@ -726,11 +712,11 @@ async function sendMessage() {
     grid-template-columns: 1fr;
     gap: 2rem;
   }
-  
+
   .commitment-stats {
     order: -1;
   }
-  
+
   .story-img {
     height: 300px;
   }
@@ -740,19 +726,19 @@ async function sendMessage() {
   .hero-content h1 {
     font-size: 2.5rem;
   }
-  
+
   .hero-subtitle {
     font-size: 1.1rem;
   }
-  
+
   .section-title {
     font-size: 2rem;
   }
-  
+
   .commitment-stats {
     grid-template-columns: 1fr;
   }
-  
+
   .stat-number {
     font-size: 2rem;
   }

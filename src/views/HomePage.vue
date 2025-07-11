@@ -1,6 +1,6 @@
 <template>
   <div class="home-page">
-    <!-- Hero Section -->
+
     <section class="hero">
       <div class="hero-content">
         <div class="hero-text">
@@ -8,7 +8,7 @@
             Bienvenue sur <span class="brand-highlight">EcoMarket</span>
           </h1>
           <p class="hero-subtitle">
-            Découvrez des produits artisanaux et respectueux de l'environnement, 
+            Découvrez des produits artisanaux et respectueux de l'environnement,
             créés avec passion par des artisans locaux.
           </p>
           <div class="hero-actions">
@@ -21,8 +21,8 @@
           </div>
         </div>
         <div class="hero-image">
-          <img 
-            src="https://images.unsplash.com/photo-1542838132-92c53300491e?w=600&h=400&fit=crop&crop=center&auto=format&q=80" 
+          <img
+            src="https://images.unsplash.com/photo-1542838132-92c53300491e?w=600&h=400&fit=crop&crop=center&auto=format&q=80"
             alt="Produits artisanaux écologiques"
             class="hero-img"
             loading="lazy"
@@ -31,7 +31,6 @@
       </div>
     </section>
 
-    <!-- Section Valeurs -->
     <section class="values-section">
       <div class="container">
         <h2 class="section-title">Nos valeurs</h2>
@@ -68,7 +67,6 @@
       </div>
     </section>
 
-    <!-- Section Produits Populaires -->
     <section class="featured-products">
       <div class="container">
         <h2 class="section-title">Produits populaires</h2>
@@ -92,7 +90,6 @@
       </div>
     </section>
 
-    <!-- Section Newsletter -->
     <section class="newsletter-section">
       <div class="container">
         <div class="newsletter-content">
@@ -129,40 +126,32 @@ import ProductCard from '@/components/common/ProductCard.vue'
 
 const router = useRouter()
 const productsStore = useProductsStore()
-const cartStore = useCartStore()
-
-// État local
+const cartStore = useCartStore()
 const emailInput = ref('')
 const isSubscribing = ref(false)
 const subscriptionMessage = ref('')
-const messageType = ref('')
-
-// Computed
+const messageType = ref('')
 const loading = computed(() => productsStore.loading)
-const featuredProducts = computed(() => 
+const featuredProducts = computed(() =>
   productsStore.products.slice(0, 4) // Affiche les 4 premiers produits
-)
-
-// Méthodes
+)
 function goToProduct(product) {
   router.push(`/product/${product.id}`)
 }
 
 function addToCart(product) {
-  cartStore.addItem(product)
-  // Feedback visuel pourrait être ajouté ici
+  cartStore.addItem(product)
 }
 
 async function subscribeNewsletter() {
   if (!emailInput.value) return
-  
+
   isSubscribing.value = true
   subscriptionMessage.value = ''
-  
-  try {
-    // Simulation d'un appel API
+
+  try {
     await new Promise(resolve => setTimeout(resolve, 1500))
-    
+
     subscriptionMessage.value = 'Inscription réussie ! Merci de votre confiance.'
     messageType.value = 'success'
     emailInput.value = ''
@@ -176,11 +165,8 @@ async function subscribeNewsletter() {
       subscriptionMessage.value = ''
     }, 5000)
   }
-}
-
-// Lifecycle
-onMounted(() => {
-  // Charge les produits si pas déjà fait
+}
+onMounted(() => {
   if (productsStore.products.length === 0) {
     productsStore.fetchProducts()
   }
@@ -459,19 +445,17 @@ onMounted(() => {
   background: rgba(255, 255, 255, 0.2);
   color: #ffffff;
   border: 1px solid rgba(255, 255, 255, 0.3);
-}
-
-/* Responsive */
+}
 @media (max-width: 968px) {
   .hero-content {
     grid-template-columns: 1fr;
     text-align: center;
   }
-  
+
   .hero-title {
     font-size: 2.5rem;
   }
-  
+
   .hero-actions {
     justify-content: center;
   }
@@ -481,19 +465,19 @@ onMounted(() => {
   .hero {
     padding: 2rem 1rem;
   }
-  
+
   .hero-title {
     font-size: 2rem;
   }
-  
+
   .section-title {
     font-size: 2rem;
   }
-  
+
   .newsletter-form {
     flex-direction: column;
   }
-  
+
   .products-grid {
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   }

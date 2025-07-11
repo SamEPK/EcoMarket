@@ -13,22 +13,22 @@ export const useProductsStore = defineStore('products', () => {
     maxPrice: 1000,
     searchTerm: ''
   })
-  
+
   const { fetchData } = useApi()
   const filteredProducts: ComputedRef<Product[]> = computed(() => {
     let filtered = products.value
-    
+
     if (filters.value.category) {
-      filtered = filtered.filter(product => 
+      filtered = filtered.filter(product =>
         product.category.toLowerCase() === filters.value.category.toLowerCase()
       )
     }
-    
-    filtered = filtered.filter(product => 
-      product.price >= filters.value.minPrice && 
+
+    filtered = filtered.filter(product =>
+      product.price >= filters.value.minPrice &&
       product.price <= filters.value.maxPrice
     )
-    
+
     if (filters.value.searchTerm) {
       const term = filters.value.searchTerm.toLowerCase()
       filtered = filtered.filter(product =>
@@ -36,25 +36,25 @@ export const useProductsStore = defineStore('products', () => {
         product.description.toLowerCase().includes(term)
       )
     }
-    
+
     return filtered
   })
-  
+
   const categories: ComputedRef<string[]> = computed(() => {
     const cats = [...new Set(products.value.map(p => p.category))]
     return cats.sort()
   })
-  
+
   async function fetchProducts(): Promise<void> {
     loading.value = true
     error.value = null
-    
+
     try {
       let apiProducts = []
-      
+
       try {
         const apiResponse = await fetchData('https://fakestoreapi.com/products')
-        
+
         apiProducts = apiResponse.map((product: any) => ({
           id: product.id,
           name: product.title,
@@ -69,7 +69,7 @@ export const useProductsStore = defineStore('products', () => {
       } catch (apiError) {
         console.warn('API externe non disponible, utilisation des données locales:', apiError)
       }
-      
+
       const ecoProducts: Product[] = [
         {
           id: 101,
@@ -149,7 +149,7 @@ export const useProductsStore = defineStore('products', () => {
           artisan: "Domaine des Oliviers"
         }
       ]
-      
+
       products.value = [...ecoProducts, ...apiProducts]
     } catch (err) {
       error.value = 'Erreur lors du chargement des produits'
@@ -178,7 +178,7 @@ export const useProductsStore = defineStore('products', () => {
   function transformCategory(apiCategory: string): string {
     const categoryMap: Record<string, string> = {
       "men's clothing": "Vêtements",
-      "women's clothing": "Vêtements", 
+      "women's clothing": "Vêtements",
       "jewelery": "Bijoux",
       "electronics": "Électronique"
     }
@@ -192,7 +192,7 @@ export const useProductsStore = defineStore('products', () => {
       "Électronique": ["Tech Responsable", "Éco-Innovation", "Green Tech"],
       "Divers": ["Artisan Local", "Créateur Responsable", "Éco-Artisan"]
     }
-    
+
     const names = artisanNames[category] || artisanNames["Divers"]
     return names[Math.floor(Math.random() * names.length)]
   }

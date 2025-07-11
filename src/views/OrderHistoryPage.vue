@@ -1,13 +1,12 @@
 <template>
   <div class="order-history-page">
     <div class="container">
-      <!-- En-tête -->
+
       <div class="page-header">
         <h1>Historique des commandes</h1>
         <p class="subtitle">Retrouvez toutes vos commandes passées</p>
       </div>
 
-      <!-- Filtres -->
       <div class="filters-section">
         <div class="filters">
           <div class="filter-group">
@@ -21,7 +20,7 @@
               <option value="cancelled">Annulée</option>
             </select>
           </div>
-          
+
           <div class="filter-group">
             <label for="dateFilter">Période</label>
             <select id="dateFilter" v-model="selectedPeriod" class="filter-select">
@@ -31,7 +30,7 @@
               <option value="last-year">Dernière année</option>
             </select>
           </div>
-          
+
           <button @click="clearFilters" class="clear-filters-btn">
             <X :size="16" />
             Effacer les filtres
@@ -39,7 +38,6 @@
         </div>
       </div>
 
-      <!-- État vide -->
       <div v-if="filteredOrders.length === 0" class="empty-state">
         <div class="empty-icon">
           <Package :size="64" />
@@ -58,20 +56,19 @@
         </RouterLink>
       </div>
 
-      <!-- Liste des commandes -->
       <div v-else class="orders-list">
-        <div 
-          v-for="order in filteredOrders" 
+        <div
+          v-for="order in filteredOrders"
           :key="order.id"
           class="order-card"
         >
-          <!-- En-tête de la commande -->
+
           <div class="order-header">
             <div class="order-info">
               <h3 class="order-number">Commande #{{ order.number }}</h3>
               <p class="order-date">{{ formatDate(order.date) }}</p>
             </div>
-            
+
             <div class="order-status">
               <span class="status-badge" :class="order.status">
                 <component :is="getStatusIcon(order.status)" :size="16" />
@@ -80,9 +77,8 @@
             </div>
           </div>
 
-          <!-- Détails de la commande -->
           <div class="order-details" :class="{ expanded: expandedOrders.includes(order.id) }">
-            <!-- Résumé -->
+
             <div class="order-summary">
               <div class="summary-item">
                 <span class="label">Articles:</span>
@@ -94,12 +90,11 @@
               </div>
             </div>
 
-            <!-- Articles (affiché si développé) -->
             <div v-if="expandedOrders.includes(order.id)" class="order-items">
               <h4>Articles commandés</h4>
               <div class="items-list">
-                <div 
-                  v-for="item in order.items" 
+                <div
+                  v-for="item in order.items"
                   :key="item.id"
                   class="order-item"
                 >
@@ -117,7 +112,6 @@
               </div>
             </div>
 
-            <!-- Adresse de livraison (affiché si développé) -->
             <div v-if="expandedOrders.includes(order.id)" class="delivery-info">
               <h4>Adresse de livraison</h4>
               <div class="address">
@@ -128,21 +122,20 @@
             </div>
           </div>
 
-          <!-- Actions -->
           <div class="order-actions">
-            <button 
+            <button
               @click="toggleOrderExpansion(order.id)"
               class="toggle-btn"
             >
-              <ChevronDown 
-                :size="16" 
+              <ChevronDown
+                :size="16"
                 :class="{ rotated: expandedOrders.includes(order.id) }"
               />
               {{ expandedOrders.includes(order.id) ? 'Voir moins' : 'Voir plus' }}
             </button>
-            
+
             <div class="action-buttons">
-              <button 
+              <button
                 v-if="order.status === 'delivered'"
                 @click="reorderItems(order)"
                 class="action-btn reorder"
@@ -150,8 +143,8 @@
                 <RotateCcw :size="16" />
                 Recommander
               </button>
-              
-              <button 
+
+              <button
                 v-if="order.status !== 'cancelled' && order.status !== 'delivered'"
                 @click="trackOrder(order)"
                 class="action-btn track"
@@ -159,8 +152,8 @@
                 <Truck :size="16" />
                 Suivre
               </button>
-              
-              <button 
+
+              <button
                 @click="downloadInvoice(order)"
                 class="action-btn download"
               >
@@ -172,20 +165,19 @@
         </div>
       </div>
 
-      <!-- Pagination -->
       <div v-if="totalPages > 1" class="pagination">
-        <button 
-          @click="currentPage--" 
+        <button
+          @click="currentPage--"
           :disabled="currentPage === 1"
           class="pagination-btn"
         >
           <ChevronLeft :size="16" />
           Précédent
         </button>
-        
+
         <div class="page-numbers">
-          <button 
-            v-for="page in visiblePages" 
+          <button
+            v-for="page in visiblePages"
             :key="page"
             @click="currentPage = page"
             :class="{ active: page === currentPage }"
@@ -194,9 +186,9 @@
             {{ page }}
           </button>
         </div>
-        
-        <button 
-          @click="currentPage++" 
+
+        <button
+          @click="currentPage++"
           :disabled="currentPage === totalPages"
           class="pagination-btn"
         >
@@ -211,11 +203,11 @@
 <script setup>
 import { computed, ref, reactive, onMounted } from 'vue'
 import { RouterLink, useRouter } from 'vue-router'
-import { 
-  Package, 
-  ShoppingBag, 
-  ChevronDown, 
-  ChevronLeft, 
+import {
+  Package,
+  ShoppingBag,
+  ChevronDown,
+  ChevronLeft,
   ChevronRight,
   X,
   Clock,
@@ -233,35 +225,29 @@ import { useNotifications } from '@/composables/useNotifications'
 const router = useRouter()
 const cartStore = useCartStore()
 const ordersStore = useOrdersStore()
-const { showNotification } = useNotifications()
-
-// État des filtres
+const { showNotification } = useNotifications()
 const selectedStatus = ref('')
 const selectedPeriod = ref('')
 const currentPage = ref(1)
-const itemsPerPage = 5
-
-// État de l'expansion des commandes
-const expandedOrders = ref([])
-
-// Computed properties
+const itemsPerPage = 5
+const expandedOrders = ref([])
 const hasActiveFilters = computed(() => {
   return selectedStatus.value !== '' || selectedPeriod.value !== ''
 })
 
 const filteredOrders = computed(() => {
   let filtered = [...ordersStore.orders]
-  
+
   // Filtre par statut
   if (selectedStatus.value) {
     filtered = filtered.filter(order => order.status === selectedStatus.value)
   }
-  
+
   // Filtre par période
   if (selectedPeriod.value) {
     const now = new Date()
     const filterDate = new Date()
-    
+
     switch (selectedPeriod.value) {
       case 'last-month':
         filterDate.setMonth(now.getMonth() - 1)
@@ -273,32 +259,32 @@ const filteredOrders = computed(() => {
         filterDate.setFullYear(now.getFullYear() - 1)
         break
     }
-    
+
     filtered = filtered.filter(order => order.date >= filterDate)
   }
-  
+
   // Tri par date (plus récent en premier)
   filtered.sort((a, b) => b.date.getTime() - a.date.getTime())
-  
+
   // Pagination
   const start = (currentPage.value - 1) * itemsPerPage
   const end = start + itemsPerPage
-  
+
   return filtered.slice(start, end)
 })
 
 const totalPages = computed(() => {
   let filtered = [...ordersStore.orders]
-  
+
   if (selectedStatus.value) {
     filtered = filtered.filter(order => order.status === selectedStatus.value)
   }
-  
+
   if (selectedPeriod.value) {
     // Même logique de filtrage par période
     const now = new Date()
     const filterDate = new Date()
-    
+
     switch (selectedPeriod.value) {
       case 'last-month':
         filterDate.setMonth(now.getMonth() - 1)
@@ -310,10 +296,10 @@ const totalPages = computed(() => {
         filterDate.setFullYear(now.getFullYear() - 1)
         break
     }
-    
+
     filtered = filtered.filter(order => order.date >= filterDate)
   }
-  
+
   return Math.ceil(filtered.length / itemsPerPage)
 })
 
@@ -321,15 +307,13 @@ const visiblePages = computed(() => {
   const pages = []
   const start = Math.max(1, currentPage.value - 2)
   const end = Math.min(totalPages.value, start + 4)
-  
+
   for (let i = start; i <= end; i++) {
     pages.push(i)
   }
-  
-  return pages
-})
 
-// Méthodes
+  return pages
+})
 function formatDate(date) {
   return new Intl.DateTimeFormat('fr-FR', {
     year: 'numeric',
@@ -382,8 +366,7 @@ function clearFilters() {
   currentPage.value = 1
 }
 
-function reorderItems(order) {
-  // Ajouter tous les articles de la commande au panier
+function reorderItems(order) {
   order.items.forEach(item => {
     cartStore.addToCart({
       id: item.id,
@@ -392,7 +375,7 @@ function reorderItems(order) {
       image: item.image
     }, item.quantity)
   })
-  
+
   showNotification(`${order.items.length} article(s) ajouté(s) au panier`, 'success')
   router.push('/cart')
 }
@@ -408,8 +391,7 @@ function downloadInvoice(order) {
 }
 
 // Initialisation
-onMounted(() => {
-  // Initialiser le store avec des données d'exemple
+onMounted(() => {
   ordersStore.initializeWithSampleData()
 })
 </script>
@@ -425,9 +407,7 @@ onMounted(() => {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 1rem;
-}
-
-/* En-tête */
+}
 .page-header {
   text-align: center;
   margin-bottom: 3rem;
@@ -580,9 +560,7 @@ onMounted(() => {
 
 .order-card:hover {
   box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-}
-
-/* En-tête de commande */
+}
 .order-header {
   display: flex;
   justify-content: space-between;
@@ -762,9 +740,7 @@ onMounted(() => {
 
 .address p:last-child {
   margin-bottom: 0;
-}
-
-/* Actions de commande */
+}
 .order-actions {
   display: flex;
   justify-content: space-between;
@@ -902,59 +878,57 @@ onMounted(() => {
   background: var(--primary-color);
   color: var(--white);
   border-color: var(--primary-color);
-}
-
-/* Responsive */
+}
 @media (max-width: 768px) {
   .order-history-page {
     padding: 1rem 0;
   }
-  
+
   .page-header h1 {
     font-size: 2rem;
   }
-  
+
   .filters {
     flex-direction: column;
     align-items: stretch;
   }
-  
+
   .filter-group {
     min-width: auto;
   }
-  
+
   .order-header {
     flex-direction: column;
     align-items: stretch;
     gap: 1rem;
   }
-  
+
   .order-summary {
     flex-direction: column;
     gap: 1rem;
     align-items: stretch;
   }
-  
+
   .order-actions {
     flex-direction: column;
     gap: 1rem;
     align-items: stretch;
   }
-  
+
   .action-buttons {
     justify-content: center;
     flex-wrap: wrap;
   }
-  
+
   .order-item {
     flex-direction: column;
     text-align: center;
   }
-  
+
   .pagination {
     flex-wrap: wrap;
   }
-  
+
   .page-numbers {
     order: -1;
     width: 100%;

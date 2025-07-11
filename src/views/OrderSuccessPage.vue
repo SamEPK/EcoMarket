@@ -5,12 +5,12 @@
         <div class="success-icon">
           <Check :size="64" />
         </div>
-        
+
         <h1>Commande confirmée !</h1>
         <p class="success-message">
           Votre commande a été enregistrée avec succès. Vous recevrez bientôt un email de confirmation avec les détails de votre commande.
         </p>
-        
+
         <div class="order-info">
           <h2>Que se passe-t-il maintenant ?</h2>
           <div class="steps">
@@ -21,7 +21,7 @@
                 <p>Nous préparons votre commande avec soin</p>
               </div>
             </div>
-            
+
             <div class="step">
               <div class="step-number">2</div>
               <div class="step-content">
@@ -29,7 +29,7 @@
                 <p>Votre commande sera expédiée dans les plus brefs délais</p>
               </div>
             </div>
-            
+
             <div class="step">
               <div class="step-number">3</div>
               <div class="step-content">
@@ -39,7 +39,7 @@
             </div>
           </div>
         </div>
-        
+
         <div class="actions">
           <RouterLink to="/orders" class="view-orders-btn">
             Voir mes commandes
@@ -216,22 +216,22 @@ import { RouterLink } from 'vue-router'
   .success-content {
     padding: 2rem 1rem;
   }
-  
+
   .success-content h1 {
     font-size: 2rem;
   }
-  
+
   .steps {
     grid-template-columns: 1fr;
     text-align: center;
   }
-  
+
   .step {
     flex-direction: column;
     align-items: center;
     text-align: center;
   }
-  
+
   .actions {
     flex-direction: column;
     align-items: center;

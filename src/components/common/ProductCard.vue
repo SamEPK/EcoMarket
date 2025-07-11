@@ -1,5 +1,5 @@
 <template>
-  <article 
+  <article
     class="product-card card hover-lift"
     @click="$emit('click', product)"
     :class="{ 'out-of-stock': !product.inStock }"
@@ -8,7 +8,7 @@
     @keydown.space="$emit('click', product)"
     :aria-label="`Produit ${product.name} par ${product.artisan}`"
   >
-    <!-- Image du produit -->
+
     <div class="product-image">
       <div v-if="!imageLoaded && !imageError" class="image-loader">
         <div class="spinner-dots">
@@ -17,9 +17,9 @@
           <div></div>
         </div>
       </div>
-      
-      <img 
-        :src="optimizedImageUrl" 
+
+      <img
+        :src="optimizedImageUrl"
         :alt="`Image du produit ${product.name}`"
         @load="handleImageLoad"
         @error="handleImageError"
@@ -27,8 +27,7 @@
         loading="lazy"
         decoding="async"
       />
-      
-      <!-- Badges et overlays -->
+
       <div class="product-badges">
         <span v-if="product.isNew" class="badge badge-new">Nouveau</span>
         <span v-if="product.isEco" class="badge badge-eco">Bio</span>
@@ -36,7 +35,7 @@
           -{{ product.discount }}%
         </span>
       </div>
-      
+
       <div v-if="!product.inStock" class="out-of-stock-overlay">
         <div class="out-of-stock-content">
           <span class="out-of-stock-icon">
@@ -45,7 +44,7 @@
           <span class="out-of-stock-text">Rupture de stock</span>
         </div>
       </div>
-      
+
       <div class="rating-badge">
         <span class="rating-stars">
           <span v-for="star in 5" :key="star" class="star" :class="{ filled: star <= Math.floor(product.rating) }">
@@ -55,14 +54,13 @@
         <span class="rating-value">{{ product.rating.toFixed(1) }}</span>
       </div>
     </div>
-    
-    <!-- Informations du produit -->
+
     <div class="product-info">
       <header class="product-header">
         <h3 class="product-name">{{ product.name }}</h3>
         <p class="product-category">{{ product.category }}</p>
       </header>
-      
+
       <div class="product-details">
         <p class="product-description">{{ truncatedDescription }}</p>
         <div class="product-meta">
@@ -72,7 +70,7 @@
           </span>
         </div>
       </div>
-      
+
       <footer class="product-footer">
         <div class="product-pricing">
           <span v-if="product.originalPrice && product.originalPrice > product.price" class="original-price">
@@ -80,9 +78,9 @@
           </span>
           <span class="product-price">{{ formatPrice(product.price) }}</span>
         </div>
-        
+
         <div class="product-actions">
-          <button 
+          <button
             class="btn btn-primary add-to-cart-btn"
             @click.stop="handleAddToCart"
             :disabled="!product.inStock"
@@ -97,12 +95,11 @@
         </div>
       </footer>
     </div>
-    
-    <!-- Indicator de qualité -->
+
     <div class="quality-indicator">
       <div class="quality-bar">
-        <div 
-          class="quality-fill" 
+        <div
+          class="quality-fill"
           :style="{ width: `${(product.quality || 85)}%` }"
         ></div>
       </div>
@@ -114,9 +111,7 @@
 <script setup>
 import { computed } from 'vue'
 import { CheckCircle, ShoppingCart, AlertCircle, Star } from 'lucide-vue-next'
-import { useImage } from '@/composables/useImage'
-
-// Props avec validation étendue
+import { useImage } from '@/composables/useImage'
 const props = defineProps({
   product: {
     type: Object,
@@ -142,27 +137,21 @@ const props = defineProps({
 
 // Events émis
 const emit = defineEmits([
-  'click', 
+  'click',
   'add-to-cart'
 ])
 
 // Composable pour la gestion des images
-const { imageLoaded, imageError, handleImageLoad, handleImageError, getOptimizedImageUrl } = useImage()
-
-// Computed pour l'URL optimisée de l'image
+const { imageLoaded, imageError, handleImageLoad, handleImageError, getOptimizedImageUrl } = useImage()
 const optimizedImageUrl = computed(() => {
   return getOptimizedImageUrl(props.product.image, 300, 200)
-})
-
-// Computed pour tronquer la description
+})
 const truncatedDescription = computed(() => {
   if (props.product.description.length <= props.maxDescriptionLength) {
     return props.product.description
   }
   return props.product.description.slice(0, props.maxDescriptionLength) + '...'
-})
-
-// Méthodes
+})
 function formatPrice(price) {
   return new Intl.NumberFormat('fr-FR', {
     style: 'currency',
@@ -554,38 +543,36 @@ function handleAddToCart() {
   color: var(--text-light);
   font-weight: 500;
   white-space: nowrap;
-}
-
-/* Responsive */
+}
 @media (max-width: 768px) {
   .product-image {
     height: 180px;
   }
-  
+
   .product-info {
     padding: var(--spacing-lg);
   }
-  
+
   .product-name {
     font-size: 1.125rem;
   }
-  
+
   .product-price {
     font-size: 1.25rem;
   }
-  
+
   .product-footer {
     flex-direction: column;
     align-items: stretch;
     gap: var(--spacing-md);
   }
-  
+
   .add-to-cart-btn {
     width: 100%;
     justify-content: center;
     padding: var(--spacing-lg);
   }
-  
+
   .quality-indicator {
     position: static;
     margin-top: var(--spacing-md);
@@ -596,29 +583,29 @@ function handleAddToCart() {
   .product-image {
     height: 160px;
   }
-  
+
   .product-info {
     padding: var(--spacing-md);
   }
-  
+
   .product-name {
     font-size: 1rem;
   }
-  
+
   .product-price {
     font-size: 1.125rem;
   }
-  
+
   .product-badges {
     top: var(--spacing-sm);
     left: var(--spacing-sm);
   }
-  
+
   .rating-badge {
     top: var(--spacing-sm);
     right: var(--spacing-sm);
   }
-  
+
   .badge {
     padding: var(--spacing-xs) var(--spacing-sm);
     font-size: 0.7rem;
@@ -649,11 +636,11 @@ function handleAddToCart() {
     transition: none !important;
     animation: none !important;
   }
-  
+
   .product-card:hover {
     transform: none !important;
   }
-  
+
   .product-card:hover .product-image img {
     transform: none !important;
   }
@@ -665,11 +652,10 @@ function handleAddToCart() {
   .quality-indicator {
     background: rgba(15, 23, 42, 0.95);
   }
-  
+
   .product-card.out-of-stock {
     filter: grayscale(50%);
   }
 }
 </style>
-
 

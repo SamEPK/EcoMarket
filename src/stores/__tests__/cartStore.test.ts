@@ -21,7 +21,7 @@ describe('Cart Store', () => {
 
   it('should initialize with empty cart', () => {
     const cart = useCartStore()
-    
+
     expect(cart.items).toEqual([])
     expect(cart.totalPrice).toBe(0)
     expect(cart.itemCount).toBe(0)
@@ -29,9 +29,9 @@ describe('Cart Store', () => {
 
   it('should add item to cart', () => {
     const cart = useCartStore()
-    
+
     cart.addItem(mockProduct)
-    
+
     expect(cart.items).toHaveLength(1)
     expect(cart.items[0].id).toBe(mockProduct.id)
     expect(cart.items[0].quantity).toBe(1)
@@ -40,10 +40,10 @@ describe('Cart Store', () => {
 
   it('should increase quantity if item already exists', () => {
     const cart = useCartStore()
-    
+
     cart.addItem(mockProduct)
     cart.addItem(mockProduct)
-    
+
     expect(cart.items).toHaveLength(1)
     expect(cart.items[0].quantity).toBe(2)
     expect(cart.totalPrice).toBe(59.98)
@@ -51,41 +51,41 @@ describe('Cart Store', () => {
 
   it('should remove item from cart', () => {
     const cart = useCartStore()
-    
+
     cart.addItem(mockProduct)
     cart.removeItem(mockProduct.id)
-    
+
     expect(cart.items).toHaveLength(0)
     expect(cart.totalPrice).toBe(0)
   })
 
   it('should update item quantity', () => {
     const cart = useCartStore()
-    
+
     cart.addItem(mockProduct)
     cart.updateQuantity(mockProduct.id, 3)
-    
+
     expect(cart.items[0].quantity).toBe(3)
     expect(cart.totalPrice).toBe(89.97)
   })
 
   it('should clear cart', () => {
     const cart = useCartStore()
-    
+
     cart.addItem(mockProduct)
     cart.clearCart()
-    
+
     expect(cart.items).toHaveLength(0)
     expect(cart.totalPrice).toBe(0)
   })
 
   it('should calculate correct item count', () => {
     const cart = useCartStore()
-    
+
     cart.addItem(mockProduct)
     cart.addItem({ ...mockProduct, id: 2 })
     cart.updateQuantity(mockProduct.id, 3)
-    
+
     expect(cart.itemCount).toBe(4) // 3 + 1
   })
 })

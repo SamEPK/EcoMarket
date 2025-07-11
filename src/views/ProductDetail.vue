@@ -1,6 +1,6 @@
 <template>
   <div class="product-detail">
-    <!-- Breadcrumb -->
+
     <div class="container">
       <nav class="breadcrumb">
         <RouterLink to="/" class="breadcrumb-link">Accueil</RouterLink>
@@ -11,14 +11,13 @@
       </nav>
     </div>
 
-    <!-- Contenu principal -->
     <div class="container" v-if="product">
       <div class="product-content">
-        <!-- Image du produit -->
+
         <div class="product-image-section">
           <div class="main-image">
-            <img 
-              :src="product.image" 
+            <img
+              :src="product.image"
               :alt="product.name"
               class="product-image"
               @error="handleImageError"
@@ -29,7 +28,6 @@
           </div>
         </div>
 
-        <!-- Informations du produit -->
         <div class="product-info-section">
           <div class="product-header">
             <h1 class="product-title">{{ product.name }}</h1>
@@ -52,12 +50,11 @@
               <strong>Catégorie :</strong> {{ product.category }}
             </div>
             <div class="detail-item">
-              <strong>État :</strong> 
+              <strong>État :</strong>
               <span :class="stockClass">{{ stockText }}</span>
             </div>
           </div>
 
-          <!-- Prix et ajout au panier -->
           <div class="purchase-section">
             <div class="price-section">
               <span class="current-price">{{ formatPrice(product.price) }}</span>
@@ -66,14 +63,14 @@
             <div class="quantity-section">
               <label for="quantity">Quantité :</label>
               <div class="quantity-input">
-                <button 
-                  @click="decreaseQuantity" 
+                <button
+                  @click="decreaseQuantity"
                   :disabled="quantity <= 1"
                   class="quantity-btn"
                 >
                   -
                 </button>
-                <input 
+                <input
                   id="quantity"
                   v-model.number="quantity"
                   type="number"
@@ -81,7 +78,7 @@
                   max="10"
                   class="quantity-field"
                 />
-                <button 
+                <button
                   @click="increaseQuantity"
                   :disabled="quantity >= 10"
                   class="quantity-btn"
@@ -92,7 +89,7 @@
             </div>
 
             <div class="action-buttons">
-              <button 
+              <button
                 @click="addToCart"
                 :disabled="!product.inStock"
                 class="add-to-cart-btn"
@@ -108,14 +105,13 @@
         </div>
       </div>
 
-      <!-- Section artisan -->
       <div class="artisan-section">
         <h2>À propos de l'artisan</h2>
         <div class="artisan-info">
           <div class="artisan-details">
             <h3>{{ product.artisan }}</h3>
             <p>
-              Artisan passionné créant des produits {{ product.category.toLowerCase() }} 
+              Artisan passionné créant des produits {{ product.category.toLowerCase() }}
               de qualité exceptionnelle avec des matériaux respectueux de l'environnement.
               Chaque création est unique et fabriquée avec soin selon des méthodes traditionnelles.
             </p>
@@ -124,7 +120,6 @@
       </div>
     </div>
 
-    <!-- État de chargement -->
     <div v-else-if="loading" class="loading-state">
       <div class="container">
         <div class="loading-spinner"></div>
@@ -132,7 +127,6 @@
       </div>
     </div>
 
-    <!-- Produit non trouvé -->
     <div v-else class="not-found">
       <div class="container">
         <div class="not-found-content">
@@ -156,31 +150,23 @@ import { useCartStore } from '@/stores/cartStore'
 const route = useRoute()
 const router = useRouter()
 const productsStore = useProductsStore()
-const cartStore = useCartStore()
-
-// Props (ID du produit depuis la route)
-const productId = computed(() => route.params.id)
-
-// État local
+const cartStore = useCartStore()
+const productId = computed(() => route.params.id)
 const quantity = ref(1)
-const loading = ref(false)
-
-// Computed
-const product = computed(() => 
+const loading = ref(false)
+const product = computed(() =>
   productsStore.getProductById(productId.value)
 )
 
 const cartItemCount = computed(() => cartStore.itemCount)
 
-const stockClass = computed(() => 
+const stockClass = computed(() =>
   product.value?.inStock ? 'in-stock' : 'out-of-stock'
 )
 
-const stockText = computed(() => 
+const stockText = computed(() =>
   product.value?.inStock ? 'En stock' : 'Rupture de stock'
-)
-
-// Méthodes
+)
 function formatPrice(price) {
   return new Intl.NumberFormat('fr-FR', {
     style: 'currency',
@@ -206,23 +192,16 @@ function decreaseQuantity() {
 
 function addToCart() {
   if (product.value && product.value.inStock) {
-    cartStore.addItem(product.value, quantity.value)
-    
-    // Feedback visuel (simulation)
-    console.log(`${quantity.value} x ${product.value.name} ajouté au panier`)
-    
-    // Reset quantity après ajout
+    cartStore.addItem(product.value, quantity.value)
+    console.log(`${quantity.value} x ${product.value.name} ajouté au panier`)
     quantity.value = 1
   }
 }
 
 function goToCart() {
   router.push('/cart')
-}
-
-// Lifecycle et watchers
-onMounted(async () => {
-  // Charge les produits si pas encore fait
+}
+onMounted(async () => {
   if (productsStore.products.length === 0) {
     loading.value = true
     await productsStore.fetchProducts()
@@ -278,9 +257,7 @@ watch(productId, async (newId) => {
 
 .breadcrumb-current {
   color: var(--text-light);
-}
-
-/* Contenu principal */
+}
 .product-content {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -583,15 +560,13 @@ watch(productId, async (newId) => {
 .back-to-products:hover {
   background: #45a049;
   transform: translateY(-1px);
-}
-
-/* Responsive */
+}
 @media (max-width: 968px) {
   .product-content {
     grid-template-columns: 1fr;
     gap: 2rem;
   }
-  
+
   .product-image {
     height: 400px;
   }
@@ -601,19 +576,19 @@ watch(productId, async (newId) => {
   .product-detail {
     padding: 1rem 0;
   }
-  
+
   .product-title {
     font-size: 1.5rem;
   }
-  
+
   .current-price {
     font-size: 1.5rem;
   }
-  
+
   .product-info-section {
     padding: 1.5rem;
   }
-  
+
   .artisan-section {
     padding: 1.5rem;
   }

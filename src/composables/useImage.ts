@@ -20,7 +20,7 @@ export function useImage(): UseImageReturn {
   function handleImageError(event: Event): void {
     imageError.value = true
     imageLoaded.value = false
-    
+
     const target = event.target as HTMLImageElement
     if (target) {
       // URLs de fallback de qualité avec nouveau thème
@@ -29,7 +29,7 @@ export function useImage(): UseImageReturn {
         'https://via.placeholder.com/400x300/94a3b8/white?text=Produit+Eco',
         'https://via.placeholder.com/400x300/cbd5e1/334155?text=Artisanal'
       ]
-      
+
       // Choisir une image de fallback aléatoire pour plus de variété
       const randomIndex = Math.floor(Math.random() * fallbackImages.length)
       target.src = fallbackImages[randomIndex]
@@ -43,12 +43,12 @@ export function useImage(): UseImageReturn {
       const baseUrl = url.split('?')[0]
       return `${baseUrl}?w=${width}&h=${height}&fit=crop&crop=center&auto=format&q=80`
     }
-    
+
     // Si c'est une URL de l'API externe, garder telle quelle
     if (url.includes('fakestoreapi.com')) {
       return url
     }
-    
+
     // Pour les autres URLs, retourner telle quelle
     return url
   }

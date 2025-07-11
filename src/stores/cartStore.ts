@@ -2,25 +2,22 @@ import { defineStore } from 'pinia'
 import { ref, computed, type Ref, type ComputedRef } from 'vue'
 import type { Product, CartItem } from '@/types'
 
-export const useCartStore = defineStore('cart', () => {
-  // État réactif du panier
+export const useCartStore = defineStore('cart', () => {
   const items: Ref<CartItem[]> = ref([])
-  
+
   // Getters (computed)
-  const itemCount: ComputedRef<number> = computed(() => 
+  const itemCount: ComputedRef<number> = computed(() =>
     items.value.reduce((total, item) => total + item.quantity, 0)
   )
-  
-  const totalPrice: ComputedRef<number> = computed(() => 
+
+  const totalPrice: ComputedRef<number> = computed(() =>
     items.value.reduce((total, item) => total + (item.price * item.quantity), 0)
   )
-  
-  const isEmpty: ComputedRef<boolean> = computed(() => items.value.length === 0)
-  
-  // Actions
+
+  const isEmpty: ComputedRef<boolean> = computed(() => items.value.length === 0)
   function addItem(product: Product, quantity: number = 1): void {
     const existingItem = items.value.find(item => item.id === product.id)
-    
+
     if (existingItem) {
       existingItem.quantity += quantity
     } else {
@@ -34,14 +31,14 @@ export const useCartStore = defineStore('cart', () => {
       })
     }
   }
-  
+
   function removeItem(productId: number): void {
     const index = items.value.findIndex(item => item.id === productId)
     if (index > -1) {
       items.value.splice(index, 1)
     }
   }
-  
+
   function updateQuantity(productId: number, quantity: number): void {
     const item = items.value.find(item => item.id === productId)
     if (item) {
@@ -52,11 +49,11 @@ export const useCartStore = defineStore('cart', () => {
       }
     }
   }
-  
+
   function clearCart(): void {
     items.value = []
   }
-  
+
   return {
     items,
     itemCount,

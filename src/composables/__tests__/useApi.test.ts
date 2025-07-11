@@ -13,7 +13,7 @@ describe('useApi', () => {
 
   it('should initialize with correct default values', () => {
     const { loading, error } = useApi()
-    
+
     expect(loading.value).toBe(false)
     expect(error.value).toBe(null)
   })
@@ -23,9 +23,9 @@ describe('useApi', () => {
     mockedAxios.mockResolvedValue({ data: mockData })
 
     const { loading, error, fetchData } = useApi()
-    
+
     const result = await fetchData('/api/products')
-    
+
     expect(loading.value).toBe(false)
     expect(error.value).toBe(null)
     expect(result).toEqual(mockData)
@@ -39,9 +39,9 @@ describe('useApi', () => {
     mockedAxios.mockRejectedValue(mockError)
 
     const { loading, error, fetchData } = useApi()
-    
+
     await expect(fetchData('/api/products')).rejects.toThrow('Network Error')
-    
+
     expect(loading.value).toBe(false)
     expect(error.value).toBe('Network Error')
   })
@@ -53,7 +53,7 @@ describe('useApi', () => {
     const startTime = Date.now()
     const result = await mockApiCall(mockData, 100)
     const endTime = Date.now()
-    
+
     expect(result).toEqual(mockData)
     expect(loading.value).toBe(false)
     expect(endTime - startTime).toBeGreaterThanOrEqual(100)
