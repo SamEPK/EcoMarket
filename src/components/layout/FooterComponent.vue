@@ -171,12 +171,17 @@ function filterByCategory(category) {
   line-height: 40px;
   text-decoration: none;
   font-size: 1.2rem;
+  color: #ffffff;
   transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .social-link:hover {
   background-color: rgba(255, 255, 255, 0.3);
   transform: translateY(-2px);
+  color: #ffffff;
 }
 
 .contact-info p {
