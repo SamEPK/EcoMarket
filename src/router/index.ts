@@ -5,6 +5,7 @@ import ProductDetail from '@/views/ProductDetail.vue'
 import CartPage from '@/views/CartPage.vue'
 import CheckoutPage from '@/views/CheckoutPage.vue'
 import OrderSuccessPage from '@/views/OrderSuccessPage.vue'
+import OrderHistoryPage from '@/views/OrderHistoryPage.vue'
 import AboutPage from '@/views/AboutPage.vue'
 
 const routes = [
@@ -38,6 +39,11 @@ const routes = [
     path: '/order-success',
     name: 'order-success',
     component: OrderSuccessPage
+  },
+  {
+    path: '/orders',
+    name: 'order-history',
+    component: OrderHistoryPage
   },
   {
     path: '/about',

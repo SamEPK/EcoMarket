@@ -334,10 +334,12 @@ import { computed, ref, reactive, onMounted } from 'vue'
 import { useRouter, RouterLink } from 'vue-router'
 import { Check } from 'lucide-vue-next'
 import { useCartStore } from '@/stores/cartStore'
+import { useOrdersStore } from '@/stores/ordersStore'
 import { useNotifications } from '@/composables/useNotifications'
 
 const router = useRouter()
 const cartStore = useCartStore()
+const ordersStore = useOrdersStore()
 const { showNotification } = useNotifications()
 
 // État principal
@@ -443,6 +445,28 @@ async function confirmOrder() {
     
     // Simulation d'envoi de commande
     await new Promise(resolve => setTimeout(resolve, 2000))
+    
+    // Créer la commande dans l'historique
+    const orderItems = cartItems.value.map(item => ({
+      id: item.id,
+      name: item.name,
+      price: item.price,
+      quantity: item.quantity,
+      image: item.image
+    }))
+    
+    const newOrder = ordersStore.addOrder({
+      status: 'pending',
+      total: grandTotal.value,
+      totalItems: cartItems.value.reduce((sum, item) => sum + item.quantity, 0),
+      items: orderItems,
+      deliveryAddress: {
+        name: `${customerInfo.firstName} ${customerInfo.lastName}`,
+        street: customerInfo.address,
+        postalCode: customerInfo.postalCode,
+        city: customerInfo.city
+      }
+    })
     
     // Vider le panier
     cartStore.clearCart()

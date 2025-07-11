@@ -41,6 +41,9 @@
         </div>
         
         <div class="actions">
+          <RouterLink to="/orders" class="view-orders-btn">
+            Voir mes commandes
+          </RouterLink>
           <RouterLink to="/products" class="continue-shopping-btn">
             Continuer mes achats
           </RouterLink>
@@ -169,13 +172,24 @@ import { RouterLink } from 'vue-router'
 }
 
 .continue-shopping-btn,
-.home-btn {
+.home-btn,
+.view-orders-btn {
   display: inline-block;
   padding: 1rem 2rem;
   border-radius: 8px;
   text-decoration: none;
   font-weight: 600;
   transition: all 0.3s ease;
+}
+
+.view-orders-btn {
+  background: #17a2b8;
+  color: var(--white);
+}
+
+.view-orders-btn:hover {
+  background: #138496;
+  transform: translateY(-2px);
 }
 
 .continue-shopping-btn {

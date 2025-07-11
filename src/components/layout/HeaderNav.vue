@@ -21,6 +21,11 @@
             </RouterLink>
           </li>
           <li class="nav-item">
+            <RouterLink to="/orders" class="nav-link" @click="closeMenu">
+              Mes commandes
+            </RouterLink>
+          </li>
+          <li class="nav-item">
             <RouterLink to="/about" class="nav-link" @click="closeMenu">
               À propos
             </RouterLink>
