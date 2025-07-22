@@ -17,6 +17,17 @@ dist
 dist-ssr
 *.local
 
+# Vite specific
+.vite/
+node_modules/.vite/
+
+# Test coverage
+coverage/
+*.lcov
+.nyc_output
+test-results/
+playwright-report/
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
@@ -219,3 +230,33 @@ firebase-debug.*.log
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+
+# Package manager locks (keep only one)
+# Uncomment the appropriate one for your project
+# package-lock.json
+# yarn.lock
+# pnpm-lock.yaml
+
+# Temporary files
+*.tmp
+*.temp
+
+# Database files (if using local database)
+*.db
+*.sqlite
+*.sqlite3
+
+# API keys and secrets (additional protection)
+.env.secret
+.env.key
+config/secrets.json
+
+# Backup files
+*.backup
+*.bak
+
+# Cache directories
+.cache/
+.eslintcache
+.stylelintcache
+.prettier-cache
